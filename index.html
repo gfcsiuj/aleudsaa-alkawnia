@@ -2572,7 +2572,7 @@
     <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- Firebase SDK -->
+    <!-- Firebase SDK and Main JavaScript Combined -->
     <script type="module">
         // استيراد المكتبات اللازمة من Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -2597,10 +2597,10 @@
 
         // جعل db متاحًا عالميًا
         window.db = db;
-    </script>
+        window.collection = collection;
+        window.getDocs = getDocs;
 
-    <!-- Main JavaScript -->
-    <script>
+        // Main JavaScript
         // State Management
         let cart = [];
         let wishlist = [];
@@ -2633,7 +2633,7 @@
         });
 
         // Full Screen Toggle
-        function toggleFullScreen() {
+        window.toggleFullScreen = function() {
             isFullscreen = !isFullscreen;
             document.body.classList.toggle('fullscreen-mode');
             
@@ -2676,7 +2676,7 @@
             updateLogos(savedTheme);
         }
 
-        function toggleTheme() {
+        window.toggleTheme = function() {
             const currentTheme = document.body.getAttribute('data-theme');
             const newTheme = currentTheme === 'bronze' ? 'blue' : 'bronze';
             
@@ -2724,7 +2724,7 @@
             indicators[currentSlide].classList.add('active');
         }
 
-        function goToSlide(index) {
+        window.goToSlide = function(index) {
             const slides = document.querySelectorAll('.carousel-slide');
             const indicators = document.querySelectorAll('.indicator');
             
@@ -2739,9 +2739,9 @@
 
         // Filter Functions
         function loadBrandFilters() {
-            if (typeof products === 'undefined') return;
+            if (typeof window.products === 'undefined') return;
             
-            const brands = [...new Set(products.map(p => p.brand))];
+            const brands = [...new Set(window.products.map(p => p.brand))];
             const brandFiltersContainer = document.getElementById('brandFilters');
             
             if (brandFiltersContainer) {
@@ -2753,7 +2753,7 @@
             }
         }
 
-        function toggleBrand(brand) {
+        window.toggleBrand = function(brand) {
             const index = selectedBrands.indexOf(brand);
             if (index > -1) {
                 selectedBrands.splice(index, 1);
@@ -2769,7 +2769,7 @@
             applyAllFilters();
         }
 
-        function filterByPrice(min, max) {
+        window.filterByPrice = function(min, max) {
             priceRange = { min, max };
             
             // Update UI
@@ -2778,7 +2778,7 @@
             applyAllFilters();
         }
 
-        function toggleFilterPanel() {
+        window.toggleFilterPanel = function() {
             const panel = document.getElementById('filterPanel');
             if (panel) {
                 panel.classList.toggle('active');
@@ -2786,12 +2786,12 @@
         }
 
         function applyAllFilters() {
-            if (typeof products === 'undefined') return;
+            if (typeof window.products === 'undefined') return;
             
             // Start with category filter
             let result = currentCategory === 'all' 
-                ? [...products] 
-                : products.filter(p => p.category === currentCategory);
+                ? [...window.products] 
+                : window.products.filter(p => p.category === currentCategory);
             
             // Apply brand filter
             if (selectedBrands.length > 0) {
@@ -2817,8 +2817,8 @@
             
             try {
                 // جلب المنتجات من Firestore
-                const productsCollection = collection(window.db, 'products');
-                const productsSnapshot = await getDocs(productsCollection);
+                const productsCollection = window.collection(window.db, 'products');
+                const productsSnapshot = await window.getDocs(productsCollection);
                 
                 // تحويل البيانات إلى مصفوفة
                 const products = [];
@@ -2932,13 +2932,13 @@
             paginationContainer.innerHTML = paginationHTML;
         }
 
-        function goToPage(page) {
+        window.goToPage = function(page) {
             currentPage = page;
             loadProducts();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function filterByCategory(category) {
+        window.filterByCategory = function(category) {
             currentCategory = category;
             currentPage = 1;
             selectedBrands = [];
@@ -2960,7 +2960,7 @@
             loadProducts();
         }
 
-        function applyFilters() {
+        window.applyFilters = function() {
             const sortValue = document.getElementById('sortFilter').value;
             
             if (sortValue === 'price-asc') {
@@ -2978,7 +2978,7 @@
         }
 
         // Search
-        function handleSearch(event) {
+        window.handleSearch = function(event) {
             const query = event.target.value.toLowerCase();
             const resultsContainer = document.getElementById('searchResults');
             
@@ -2987,7 +2987,7 @@
                 return;
             }
             
-            const searchResults = products.filter(p => 
+            const searchResults = window.products.filter(p => 
                 p.name.toLowerCase().includes(query) ||
                 p.brand.toLowerCase().includes(query) ||
                 p.description?.toLowerCase().includes(query)
@@ -3011,8 +3011,8 @@
         }
 
         // Product Modal
-        function showProductModal(productId) {
-            const product = products.find(p => p.id === productId);
+        window.showProductModal = function(productId) {
+            const product = window.products.find(p => p.id === productId);
             if (!product) return;
             
             const modal = document.getElementById('productModal');
@@ -3104,7 +3104,7 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function changeModalImage(src, element) {
+        window.changeModalImage = function(src, element) {
             document.getElementById('modalMainImage').src = src;
             
             element.parentElement.querySelectorAll('img').forEach(img => {
@@ -3113,15 +3113,15 @@
             element.classList.add('active');
         }
 
-        function closeModal() {
+        window.closeModal = function() {
             document.getElementById('productModal').classList.remove('active');
             document.getElementById('overlay').classList.remove('active');
             document.body.style.overflow = '';
         }
 
         // Cart Management
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
+        window.addToCart = function(productId) {
+            const product = window.products.find(p => p.id === productId);
             if (!product) return;
             
             const existingItem = cart.find(item => item.id === productId);
@@ -3136,13 +3136,13 @@
             showToast(`تم إضافة ${product.name} إلى السلة`);
         }
 
-        function removeFromCart(productId) {
+        window.removeFromCart = function(productId) {
             cart = cart.filter(item => item.id !== productId);
             updateUI();
             showToast('تم حذف المنتج من السلة');
         }
 
-        function updateQuantity(productId, change) {
+        window.updateQuantity = function(productId, change) {
             const item = cart.find(item => item.id === productId);
             if (!item) return;
             
@@ -3156,8 +3156,8 @@
         }
 
         // Wishlist Management
-        function addToWishlist(productId) {
-            const product = products.find(p => p.id === productId);
+        window.addToWishlist = function(productId) {
+            const product = window.products.find(p => p.id === productId);
             if (!product) return;
             
             const existingItem = wishlist.find(item => item.id === productId);
@@ -3174,7 +3174,7 @@
             loadProducts(); // Refresh product cards
         }
 
-        function removeFromWishlist(productId) {
+        window.removeFromWishlist = function(productId) {
             wishlist = wishlist.filter(item => item.id !== productId);
             updateUI();
             showToast('تم حذف المنتج من المفضلة');
@@ -3263,7 +3263,7 @@
             }
         }
 
-        function checkout() {
+        window.checkout = function() {
             if (cart.length === 0) {
                 showToast('السلة فارغة');
                 return;
@@ -3287,7 +3287,7 @@
         }
 
         // UI Toggles
-        function toggleCart() {
+        window.toggleCart = function() {
             const cartSidebar = document.getElementById('cartSidebar');
             const wishlistSidebar = document.getElementById('wishlistSidebar');
             const overlay = document.getElementById('overlay');
@@ -3297,7 +3297,7 @@
             overlay.classList.toggle('active');
         }
 
-        function toggleWishlist() {
+        window.toggleWishlist = function() {
             const cartSidebar = document.getElementById('cartSidebar');
             const wishlistSidebar = document.getElementById('wishlistSidebar');
             const overlay = document.getElementById('overlay');
@@ -3307,7 +3307,7 @@
             overlay.classList.toggle('active');
         }
 
-        function toggleMobileMenu() {
+        window.toggleMobileMenu = function() {
             const mobileMenu = document.getElementById('mobileMenu');
             const overlay = document.getElementById('overlay');
             const menuBtn = document.querySelector('.mobile-menu-btn');
@@ -3362,7 +3362,7 @@
             }, 4000); // Adjusted to match the longest animation duration + a small buffer
         }
 
-        function subscribeNewsletter(event) {
+        window.subscribeNewsletter = function(event) {
             event.preventDefault();
             const email = event.target.querySelector('input[type="email"]').value;
             showToast(`شكراً لاشتراكك! سنرسل العروض على ${email}`);
