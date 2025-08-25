@@ -2572,8 +2572,32 @@
     <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- Products Data Script -->
-    <script src="products.js"></script>
+    <!-- Firebase SDK -->
+    <script type="module">
+        // استيراد المكتبات اللازمة من Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+
+        // تكوين Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAI7J5rkkR3nMPdLlfV_UoeIbrAs4yMyRQ",
+            authDomain: "cosmic-lens-store.firebaseapp.com",
+            projectId: "cosmic-lens-store",
+            storageBucket: "cosmic-lens-store.firebasestorage.app",
+            messagingSenderId: "918317756201",
+            appId: "1:918317756201:web:2bd7192d8114d2057c5138",
+            measurementId: "G-132YF27YK7"
+        };
+
+        // تهيئة Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        // جعل db متاحًا عالميًا
+        window.db = db;
+    </script>
 
     <!-- Main JavaScript -->
     <script>
@@ -2786,71 +2810,93 @@
         }
 
         // Products
-        function loadProducts() {
-            if (typeof products === 'undefined') return;
-            
-            // Filter by category if no other filters applied
-            if (selectedBrands.length === 0 && priceRange.min === 0 && priceRange.max === Infinity) {
-                if (currentCategory === 'all') {
-                    filteredProducts = [...products];
-                } else {
-                    filteredProducts = products.filter(p => p.category === currentCategory);
-                }
-            }
-            
-            // Apply sorting
-            const sortValue = document.getElementById('sortFilter')?.value;
-            if (sortValue) {
-                applyFilters();
-                return;
-            }
-            
-            // Paginate
-            const start = (currentPage - 1) * productsPerPage;
-            const end = start + productsPerPage;
-            const paginatedProducts = filteredProducts.slice(start, end);
-            
+        async function loadProducts() {
+            // إظهار مؤشر التحميل
             const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--text-secondary);"><i class="fas fa-spinner fa-spin fa-2x"></i><br>جاري تحميل المنتجات...</div>';
             
-            if (paginatedProducts.length === 0) {
-                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--text-secondary);">لا توجد منتجات في هذه الفئة</div>';
-                document.getElementById('pagination').innerHTML = '';
-                return;
+            try {
+                // جلب المنتجات من Firestore
+                const productsCollection = collection(window.db, 'products');
+                const productsSnapshot = await getDocs(productsCollection);
+                
+                // تحويل البيانات إلى مصفوفة
+                const products = [];
+                productsSnapshot.forEach((doc) => {
+                    products.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                // تخزين المنتجات في متغير عام للاستخدام في الصفحة
+                window.products = products;
+                
+                // Filter by category if no other filters applied
+                if (selectedBrands.length === 0 && priceRange.min === 0 && priceRange.max === Infinity) {
+                    if (currentCategory === 'all') {
+                        filteredProducts = [...products];
+                    } else {
+                        filteredProducts = products.filter(p => p.category === currentCategory);
+                    }
+                }
+                
+                // Apply sorting
+                const sortValue = document.getElementById('sortFilter')?.value;
+                if (sortValue) {
+                    applyFilters();
+                    return;
+                }
+                
+                // Paginate
+                const start = (currentPage - 1) * productsPerPage;
+                const end = start + productsPerPage;
+                const paginatedProducts = filteredProducts.slice(start, end);
+                
+                if (paginatedProducts.length === 0) {
+                    grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--text-secondary);">لا توجد منتجات في هذه الفئة</div>';
+                    document.getElementById('pagination').innerHTML = '';
+                    return;
+                }
+                
+                grid.innerHTML = paginatedProducts.map(product => `
+                    <div class="product-card" onclick="showProductModal(${product.id})">
+                        <div class="product-image-wrapper">
+                            ${product.discount ? `<span class="product-badge sale">-${product.discount}%</span>` : ''}
+                            ${product.badge && !product.discount ? `<span class="product-badge">${product.badge}</span>` : ''}
+                            <img src="${product.images?.[0] || product.image}" alt="${product.name}" class="product-image" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-brand">${product.brand}</div>
+                            <h3 class="product-name">${product.name}</h3>
+                            <div class="product-rating">
+                                <div class="stars">${generateStars(product.rating)}</div>
+                                <span class="rating-text">(${product.rating})</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price">${formatPrice(calculatePrice(product))}</span>
+                                ${product.discount ? `<span class="old-price">${formatPrice(product.price)}</span>` : ''}
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${product.id});">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    أضف للسلة
+                                </button>
+                                <button class="quick-btn" onclick="event.stopPropagation(); addToWishlist(${product.id});">
+                                    <i class="${wishlist.find(w => w.id === product.id) ? 'fas' : 'far'} fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Update pagination
+                updatePagination();
+                
+            } catch (error) {
+                console.error('Error loading products:', error);
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--text-secondary);">حدث خطأ أثناء تحميل المنتجات. يرجى المحاولة مرة أخرى.</div>';
             }
-            
-            grid.innerHTML = paginatedProducts.map(product => `
-                <div class="product-card" onclick="showProductModal(${product.id})">
-                    <div class="product-image-wrapper">
-                        ${product.discount ? `<span class="product-badge sale">-${product.discount}%</span>` : ''}
-                        ${product.badge && !product.discount ? `<span class="product-badge">${product.badge}</span>` : ''}
-                        <img src="${product.images?.[0] || product.image}" alt="${product.name}" class="product-image" loading="lazy">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-brand">${product.brand}</div>
-                        <h3 class="product-name">${product.name}</h3>
-                        <div class="product-rating">
-                            <div class="stars">${generateStars(product.rating)}</div>
-                            <span class="rating-text">(${product.rating})</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="price">${formatPrice(calculatePrice(product))}</span>
-                            ${product.discount ? `<span class="old-price">${formatPrice(product.price)}</span>` : ''}
-                        </div>
-                        <div class="product-actions">
-                            <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${product.id});">
-                                <i class="fas fa-shopping-bag"></i>
-                                أضف للسلة
-                            </button>
-                            <button class="quick-btn" onclick="event.stopPropagation(); addToWishlist(${product.id});">
-                                <i class="${wishlist.find(w => w.id === product.id) ? 'fas' : 'far'} fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-            
-            // Update pagination
-            updatePagination();
         }
 
         function updatePagination() {
