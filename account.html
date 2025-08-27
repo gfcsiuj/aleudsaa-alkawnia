@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حسابي | العدسة الكونية</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/JTrI2AU.png">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --transition: all 0.3s ease;
+            --radius: 12px;
+        }
+        
+        [data-theme="bronze"] {
+            --primary: #CD7F32;
+            --primary-light: #E6A066;
+            --gradient: linear-gradient(135deg, #CD7F32, #E6A066);
+            --background: #000000;
+            --surface: #1A1A1A;
+            --surface-light: #2A2A2A;
+            --text-primary: #FFFFFF;
+            --text-secondary: #CCCCCC;
+            --border: rgba(205, 127, 50, 0.3);
+            --shadow: 0 4px 20px rgba(205, 127, 50, 0.1);
+        }
+
+        [data-theme="blue"] {
+            --primary: #2563EB;
+            --primary-light: #60A5FA;
+            --gradient: linear-gradient(135deg, #2563EB, #60A5FA);
+            --background: #FFFFFF;
+            --surface: #F8F9FA;
+            --surface-light: #FFFFFF;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --border: #E0E0E0;
+            --shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: var(--surface);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface-light);
+            color: var(--text-primary);
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: var(--background);
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .account-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .account-layout { grid-template-columns: 1fr; }
+        }
+
+        .sidebar {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 20px;
+            height: fit-content;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            margin-bottom: 5px;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: var(--primary);
+            color: var(--background);
+        }
+
+        .main-content {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 30px;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--surface-light);
+            border-radius: var(--radius);
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: var(--background);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Tajawal', sans-serif;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: var(--background);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: #FFFFFF;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .setting-card {
+            background: var(--surface-light);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+        }
+
+        .setting-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .toggle-switch {
+            width: 50px;
+            height: 24px;
+            background: var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .toggle-switch.active {
+            background: var(--primary);
+        }
+
+        .toggle-slider {
+            width: 20px;
+            height: 20px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: var(--transition);
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(26px);
+        }
+
+        .theme-options, .language-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .theme-option, .language-option {
+            padding: 15px;
+            border-radius: var(--radius);
+            border: 2px solid var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .theme-option.active, .language-option.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: var(--background);
+        }
+
+        .theme-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+        }
+
+        .theme-bronze .theme-preview {
+            background: linear-gradient(135deg, #CD7F32, #E6A066);
+        }
+
+        .theme-blue .theme-preview {
+            background: linear-gradient(135deg, #2563EB, #60A5FA);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--surface);
+            color: var(--text-primary);
+            padding: 15px 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transform: translateX(400px);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body data-theme="bronze">
+    <div class="container">
+        <header class="header">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-right"></i>
+                العودة للمتجر
+            </a>
+            <h1 class="page-title">
+                <i class="fas fa-user-circle"></i>
+                حسابي
+            </h1>
+        </header>
+
+        <div class="account-layout">
+            <aside class="sidebar">
+                <nav>
+                    <a href="#" class="nav-item active" data-section="profile">
+                        <i class="fas fa-user"></i>
+                        الملف الشخصي
+                    </a>
+                    <a href="#" class="nav-item" data-section="settings">
+                        <i class="fas fa-cog"></i>
+                        الإعدادات
+                    </a>
+                    <a href="#" class="nav-item" data-section="theme">
+                        <i class="fas fa-palette"></i>
+                        الثيم والمظهر
+                    </a>
+                    <a href="#" class="nav-item" data-section="language">
+                        <i class="fas fa-language"></i>
+                        اللغة
+                    </a>
+                    <a href="#" class="nav-item" data-section="help">
+                        <i class="fas fa-question-circle"></i>
+                        المساعدة
+                    </a>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <!-- Profile Section -->
+                <section id="profile" class="content-section active">
+                    <h2 class="section-title">
+                        <i class="fas fa-user"></i>
+                        الملف الشخصي
+                    </h2>
+                    
+                    <div class="profile-header">
+                        <div class="profile-avatar" id="userAvatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div>
+                            <h2 id="userName">مرحباً بك</h2>
+                            <p id="userEmail">قم بتسجيل الدخول لرؤية معلوماتك</p>
+                            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                                <button class="btn btn-primary" id="signInBtn">
+                                    <i class="fab fa-google"></i>
+                                    تسجيل الدخول
+                                </button>
+                                <button class="btn btn-danger" id="signOutBtn" style="display: none;">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    تسجيل الخروج
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-cog"></i>
+                        الإعدادات
+                    </h2>
+                    
+                    <div class="setting-card">
+                        <div class="setting-header">
+                            <div>
+                                <i class="fas fa-bell"></i>
+                                الإشعارات
+                            </div>
+                            <div class="toggle-switch" id="notificationsToggle">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+                        <p>تلقي إشعارات حول العروض والمنتجات الجديدة</p>
+                    </div>
+
+                    <div class="setting-card">
+                        <div class="setting-header">
+                            <div>
+                                <i class="fas fa-envelope"></i>
+                                النشرة البريدية
+                            </div>
+                            <div class="toggle-switch" id="newsletterToggle">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+                        <p>تلقي رسائل بريدية بالعروض والأخبار</p>
+                    </div>
+                </section>
+
+                <!-- Theme Section -->
+                <section id="theme" class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-palette"></i>
+                        الثيم والمظهر
+                    </h2>
+                    
+                    <div class="setting-card">
+                        <h3>اختر الثيم المفضل</h3>
+                        <div class="theme-options">
+                            <div class="theme-option theme-bronze active" data-theme="bronze">
+                                <div class="theme-preview"></div>
+                                البرونزي
+                            </div>
+                            <div class="theme-option theme-blue" data-theme="blue">
+                                <div class="theme-preview"></div>
+                                الأزرق
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Language Section -->
+                <section id="language" class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-language"></i>
+                        اللغة
+                    </h2>
+                    
+                    <div class="setting-card">
+                        <h3>اختر لغة الواجهة</h3>
+                        <div class="language-options">
+                            <div class="language-option active" data-lang="ar">
+                                🇸🇦 العربية
+                            </div>
+                            <div class="language-option" data-lang="en">
+                                🇺🇸 English
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Help Section -->
+                <section id="help" class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-question-circle"></i>
+                        المساعدة والدعم
+                    </h2>
+                    
+                    <div class="setting-card">
+                        <h3><i class="fas fa-phone"></i> اتصل بنا</h3>
+                        <p>تواصل معنا مباشرة للحصول على المساعدة</p>
+                        <button class="btn btn-primary" onclick="window.open('tel:+9647833655002')">
+                            <i class="fas fa-phone"></i>
+                            07833655002
+                        </button>
+                    </div>
+
+                    <div class="setting-card">
+                        <h3><i class="fab fa-whatsapp"></i> واتساب</h3>
+                        <p>تواصل معنا عبر الواتساب</p>
+                        <button class="btn" onclick="window.open('https://wa.me/9647833655002', '_blank')" style="background: #25D366; color: white;">
+                            <i class="fab fa-whatsapp"></i>
+                            فتح الواتساب
+                        </button>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAI7J5rkkR3nMPdLlfV_UoeIbrAs4yMyRQ",
+            authDomain: "cosmic-lens-store.firebaseapp.com",
+            projectId: "cosmic-lens-store",
+            storageBucket: "cosmic-lens-store.firebasestorage.app",
+            messagingSenderId: "918317756201",
+            appId: "1:918317756201:web:2bd7192d8114d2057c5138"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const googleProvider = new GoogleAuthProvider();
+
+        window.auth = auth;
+        window.googleProvider = googleProvider;
+        window.signInWithPopup = signInWithPopup;
+        window.signOut = signOut;
+        window.onAuthStateChanged = onAuthStateChanged;
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initAuth();
+            initNavigation();
+            initTheme();
+            initSettings();
+        });
+
+        function initAuth() {
+            window.onAuthStateChanged(window.auth, (user) => {
+                updateUserInterface(user);
+            });
+        }
+
+        function updateUserInterface(user) {
+            const userName = document.getElementById('userName');
+            const userEmail = document.getElementById('userEmail');
+            const userAvatar = document.getElementById('userAvatar');
+            const signInBtn = document.getElementById('signInBtn');
+            const signOutBtn = document.getElementById('signOutBtn');
+
+            if (user) {
+                userName.textContent = user.displayName || 'المستخدم';
+                userEmail.textContent = user.email;
+                
+                if (user.photoURL) {
+                    userAvatar.innerHTML = `<img src="${user.photoURL}" alt="صورة المستخدم">`;
+                } else {
+                    userAvatar.innerHTML = '<i class="fas fa-user-circle"></i>';
+                }
+                
+                signInBtn.style.display = 'none';
+                signOutBtn.style.display = 'flex';
+            } else {
+                userName.textContent = 'مرحباً بك';
+                userEmail.textContent = 'قم بتسجيل الدخول لرؤية معلوماتك';
+                userAvatar.innerHTML = '<i class="fas fa-user-circle"></i>';
+                signInBtn.style.display = 'flex';
+                signOutBtn.style.display = 'none';
+            }
+        }
+
+        document.getElementById('signInBtn').addEventListener('click', async () => {
+            try {
+                await window.signInWithPopup(window.auth, window.googleProvider);
+                showToast('تم تسجيل الدخول بنجاح!');
+            } catch (error) {
+                showToast('فشل تسجيل الدخول');
+            }
+        });
+
+        document.getElementById('signOutBtn').addEventListener('click', async () => {
+            try {
+                await window.signOut(window.auth);
+                showToast('تم تسجيل الخروج بنجاح!');
+            } catch (error) {
+                showToast('فشل تسجيل الخروج');
+            }
+        });
+
+        function initNavigation() {
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.content-section');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetSection = item.dataset.section;
+
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    item.classList.add('active');
+
+                    sections.forEach(section => section.classList.remove('active'));
+                    document.getElementById(targetSection).classList.add('active');
+                });
+            });
+        }
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'bronze';
+            document.body.setAttribute('data-theme', savedTheme);
+            updateThemeSelection(savedTheme);
+
+            const themeOptions = document.querySelectorAll('.theme-option');
+            themeOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const theme = option.dataset.theme;
+                    setTheme(theme);
+                });
+            });
+        }
+
+        function setTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            updateThemeSelection(theme);
+            showToast(`تم تغيير الثيم إلى ${theme === 'bronze' ? 'البرونزي' : 'الأزرق'}`);
+        }
+
+        function updateThemeSelection(theme) {
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.dataset.theme === theme) {
+                    option.classList.add('active');
+                }
+            });
+        }
+
+        function initSettings() {
+            const toggles = document.querySelectorAll('.toggle-switch');
+            toggles.forEach(toggle => {
+                const settingKey = toggle.id.replace('Toggle', '');
+                const saved = localStorage.getItem(settingKey);
+                
+                if (saved === 'true') {
+                    toggle.classList.add('active');
+                }
+
+                toggle.addEventListener('click', () => {
+                    toggle.classList.toggle('active');
+                    const isActive = toggle.classList.contains('active');
+                    localStorage.setItem(settingKey, isActive);
+                    showToast(`تم ${isActive ? 'تفعيل' : 'إلغاء'} الإعداد`);
+                });
+            });
+
+            const langOptions = document.querySelectorAll('.language-option');
+            langOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    langOptions.forEach(opt => opt.classList.remove('active'));
+                    option.classList.add('active');
+                    
+                    const lang = option.dataset.lang;
+                    localStorage.setItem('language', lang);
+                    showToast('تم تغيير اللغة');
+                });
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
