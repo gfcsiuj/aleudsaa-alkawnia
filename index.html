@@ -3765,6 +3765,10 @@
             if (isAuthenticating) return;
             isAuthenticating = true;
 
+            // Debug: Log current domain
+            console.log('Current domain:', window.location.hostname);
+            console.log('Current origin:', window.location.origin);
+
             const signInBtn = document.getElementById('googleSignInBtn');
             signInBtn.disabled = true;
             signInBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري تسجيل الدخول...';
@@ -3791,6 +3795,13 @@
                     errorMessage = "تم حظر النافذة المنبثقة، يرجى السماح بها في المتصفح.";
                 } else if (error.code === 'auth/cancelled-popup-request') {
                     errorMessage = "تم إلغاء طلب تسجيل الدخول.";
+                } else if (error.code === 'auth/unauthorized-domain') {
+                    console.error('Unauthorized domain details:', {
+                        currentDomain: window.location.hostname,
+                        currentOrigin: window.location.origin,
+                        error: error
+                    });
+                    errorMessage = `النطاق '${window.location.hostname}' غير مفوض لتسجيل الدخول. يرجى إضافة هذا النطاق في Firebase Console.`;
                 }
                 
                 showAuthStatus(errorMessage, 'error');
