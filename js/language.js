@@ -27,6 +27,27 @@ class LanguageSystem {
                 heroSubtitle: 'بين يديك اليوم',
                 heroDescription: 'اكتشف أحدث التقنيات والإلكترونيات بأفضل الأسعار',
                 heroButton: 'تسوق الآن',
+                heroBadgeExclusive: 'حصري',
+                heroBadgeNew: 'جديد',
+                heroBadgeSpecial: 'عرض خاص',
+                heroTitle1: 'أحدث أجهزة اللابتوب',
+                heroDesc1: 'تشكيلة واسعة من أفضل الماركات العالمية',
+                heroTitle2: 'كمبيوترات الألعاب',
+                heroDesc2: 'قوة الأداء وأحدث التقنيات',
+                heroTitle3: 'أجهزة التابلت',
+                heroDesc3: 'للعمل والترفيه في جهاز واحد',
+                heroButton2: 'اكتشف المزيد',
+                
+                // Products Section
+                ourProducts: 'منتجاتنا',
+                sortBy: 'ترتيب حسب',
+                priceLowHigh: 'السعر: الأقل للأعلى',
+                priceHighLow: 'السعر: الأعلى للأقل',
+                rating: 'التقييم',
+                newest: 'الأحدث',
+                filter: 'فلترة',
+                brand: 'العلامة التجارية',
+                priceRange: 'نطاق السعر',
                 
                 // Filter Section
                 filterTitle: 'تصفية النتائج',
@@ -82,6 +103,8 @@ class LanguageSystem {
                 contactUs: 'تواصل معنا',
                 workingHours: 'السبت - الخميس: 10ص - 9م',
                 allRightsReserved: 'جميع الحقوق محفوظة',
+                siteDescription: 'وجهتك الأولى للتقنية والإلكترونيات',
+                location: 'بغداد - ساحة التحرير - عمارة الخيام',
                 
                 // Mobile Navigation
                 home: 'الرئيسية',
@@ -169,6 +192,27 @@ class LanguageSystem {
                 heroSubtitle: 'In Your Hands Today',
                 heroDescription: 'Discover the latest technology and electronics at the best prices',
                 heroButton: 'Shop Now',
+                heroBadgeExclusive: 'Exclusive',
+                heroBadgeNew: 'New',
+                heroBadgeSpecial: 'Special Offer',
+                heroTitle1: 'Latest Laptops',
+                heroDesc1: 'Wide range from the best global brands',
+                heroTitle2: 'Gaming Computers',
+                heroDesc2: 'Powerful performance and latest technologies',
+                heroTitle3: 'Tablet Devices',
+                heroDesc3: 'For work and entertainment in one device',
+                heroButton2: 'Discover More',
+                
+                // Products Section
+                ourProducts: 'Our Products',
+                sortBy: 'Sort By',
+                priceLowHigh: 'Price: Low to High',
+                priceHighLow: 'Price: High to Low',
+                rating: 'Rating',
+                newest: 'Newest',
+                filter: 'Filter',
+                brand: 'Brand',
+                priceRange: 'Price Range',
                 
                 // Filter Section
                 filterTitle: 'Filter Results',
@@ -224,6 +268,8 @@ class LanguageSystem {
                 contactUs: 'Contact Us',
                 workingHours: 'Sat - Thu: 10AM - 9PM',
                 allRightsReserved: 'All Rights Reserved',
+                siteDescription: 'Your first destination for technology and electronics',
+                location: 'Baghdad - Tahrir Square - Al-Khayam Building',
                 
                 // Mobile Navigation
                 home: 'Home',
@@ -335,10 +381,13 @@ class LanguageSystem {
         // Update language selection indicators
         document.querySelectorAll('.language-option').forEach(option => {
             option.classList.remove('active');
-            if (option.dataset.lang === lang) {
+            if (option.dataset.langOption === lang) {
                 option.classList.add('active');
             }
         });
+        
+        // Handle specific elements that don't have data-lang attributes
+        this.updateSpecificElements(lang);
         
         // Update page title based on current page
         this.updatePageTitle();
