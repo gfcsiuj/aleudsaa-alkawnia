@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="https://i.imgur.com/JTrI2AU.png">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="js/language.js"></script>
     
     <style>
         :root {
@@ -311,11 +312,11 @@
         <header class="header">
             <a href="index.html" class="back-btn">
                 <i class="fas fa-arrow-right"></i>
-                العودة للمتجر
+                <span data-lang="backToStore">العودة للمتجر</span>
             </a>
             <h1 class="page-title">
                 <i class="fas fa-user-circle"></i>
-                حسابي
+                <span data-lang="myAccount">حسابي</span>
             </h1>
         </header>
 
@@ -324,23 +325,23 @@
                 <nav>
                     <a href="#" class="nav-item active" data-section="profile">
                         <i class="fas fa-user"></i>
-                        الملف الشخصي
+                        <span data-lang="profile">الملف الشخصي</span>
                     </a>
                     <a href="#" class="nav-item" data-section="settings">
                         <i class="fas fa-cog"></i>
-                        الإعدادات
+                        <span data-lang="settings">الإعدادات</span>
                     </a>
                     <a href="#" class="nav-item" data-section="theme">
                         <i class="fas fa-palette"></i>
-                        الثيم والمظهر
+                        <span data-lang="themeAppearance">الثيم والمظهر</span>
                     </a>
                     <a href="#" class="nav-item" data-section="language">
                         <i class="fas fa-language"></i>
-                        اللغة
+                        <span data-lang="language">اللغة</span>
                     </a>
                     <a href="#" class="nav-item" data-section="help">
                         <i class="fas fa-question-circle"></i>
-                        المساعدة
+                        <span data-lang="help">المساعدة</span>
                     </a>
                 </nav>
             </aside>
@@ -350,7 +351,7 @@
                 <section id="profile" class="content-section active">
                     <h2 class="section-title">
                         <i class="fas fa-user"></i>
-                        الملف الشخصي
+                        <span data-lang="profileTitle">الملف الشخصي</span>
                     </h2>
                     
                     <div class="profile-header">
@@ -358,16 +359,16 @@
                             <i class="fas fa-user-circle"></i>
                         </div>
                         <div>
-                            <h2 id="userName">مرحباً بك</h2>
-                            <p id="userEmail">قم بتسجيل الدخول لرؤية معلوماتك</p>
+                            <h2 id="userName" data-lang="welcome">مرحباً بك</h2>
+                            <p id="userEmail" data-lang="loginPrompt">قم بتسجيل الدخول لرؤية معلوماتك</p>
                             <div style="display: flex; gap: 10px; margin-top: 15px;">
                                 <button class="btn btn-primary" id="signInBtn">
                                     <i class="fab fa-google"></i>
-                                    تسجيل الدخول
+                                    <span data-lang="signIn">تسجيل الدخول</span>
                                 </button>
                                 <button class="btn btn-danger" id="signOutBtn" style="display: none;">
                                     <i class="fas fa-sign-out-alt"></i>
-                                    تسجيل الخروج
+                                    <span data-lang="signOut">تسجيل الخروج</span>
                                 </button>
                             </div>
                         </div>
@@ -378,33 +379,33 @@
                 <section id="settings" class="content-section">
                     <h2 class="section-title">
                         <i class="fas fa-cog"></i>
-                        الإعدادات
+                        <span data-lang="settingsTitle">الإعدادات</span>
                     </h2>
                     
                     <div class="setting-card">
                         <div class="setting-header">
                             <div>
                                 <i class="fas fa-bell"></i>
-                                الإشعارات
+                                <span data-lang="notifications">الإشعارات</span>
                             </div>
                             <div class="toggle-switch" id="notificationsToggle">
                                 <div class="toggle-slider"></div>
                             </div>
                         </div>
-                        <p>تلقي إشعارات حول العروض والمنتجات الجديدة</p>
+                        <p data-lang="notificationsDesc">تلقي إشعارات حول العروض والمنتجات الجديدة</p>
                     </div>
 
                     <div class="setting-card">
                         <div class="setting-header">
                             <div>
                                 <i class="fas fa-envelope"></i>
-                                النشرة البريدية
+                                <span data-lang="newsletter">النشرة البريدية</span>
                             </div>
                             <div class="toggle-switch" id="newsletterToggle">
                                 <div class="toggle-slider"></div>
                             </div>
                         </div>
-                        <p>تلقي رسائل بريدية بالعروض والأخبار</p>
+                        <p data-lang="newsletterDesc">تلقي رسائل بريدية بالعروض والأخبار</p>
                     </div>
                 </section>
 
@@ -412,19 +413,19 @@
                 <section id="theme" class="content-section">
                     <h2 class="section-title">
                         <i class="fas fa-palette"></i>
-                        الثيم والمظهر
+                        <span data-lang="themeTitle">الثيم والمظهر</span>
                     </h2>
                     
                     <div class="setting-card">
-                        <h3>اختر الثيم المفضل</h3>
+                        <h3 data-lang="chooseTheme">اختر الثيم المفضل</h3>
                         <div class="theme-options">
                             <div class="theme-option theme-bronze active" data-theme="bronze">
                                 <div class="theme-preview"></div>
-                                البرونزي
+                                <span data-lang="bronzeTheme">البرونزي</span>
                             </div>
                             <div class="theme-option theme-blue" data-theme="blue">
                                 <div class="theme-preview"></div>
-                                الأزرق
+                                <span data-lang="blueTheme">الأزرق</span>
                             </div>
                         </div>
                     </div>
@@ -434,17 +435,17 @@
                 <section id="language" class="content-section">
                     <h2 class="section-title">
                         <i class="fas fa-language"></i>
-                        اللغة
+                        <span data-lang="languageTitle">اللغة</span>
                     </h2>
                     
                     <div class="setting-card">
-                        <h3>اختر لغة الواجهة</h3>
+                        <h3 data-lang="chooseLanguage">اختر لغة الواجهة</h3>
                         <div class="language-options">
-                            <div class="language-option active" data-lang="ar">
-                                🇸🇦 العربية
+                            <div class="language-option active" data-lang-option="ar">
+                                🇸🇦 <span data-lang="arabic">العربية</span>
                             </div>
-                            <div class="language-option" data-lang="en">
-                                🇺🇸 English
+                            <div class="language-option" data-lang-option="en">
+                                🇺🇸 <span data-lang="english">English</span>
                             </div>
                         </div>
                     </div>
@@ -454,12 +455,12 @@
                 <section id="help" class="content-section">
                     <h2 class="section-title">
                         <i class="fas fa-question-circle"></i>
-                        المساعدة والدعم
+                        <span data-lang="helpTitle">المساعدة والدعم</span>
                     </h2>
                     
                     <div class="setting-card">
-                        <h3><i class="fas fa-phone"></i> اتصل بنا</h3>
-                        <p>تواصل معنا مباشرة للحصول على المساعدة</p>
+                        <h3><i class="fas fa-phone"></i> <span data-lang="callUs">اتصل بنا</span></h3>
+                        <p data-lang="callUsDesc">تواصل معنا مباشرة للحصول على المساعدة</p>
                         <button class="btn btn-primary" onclick="window.open('tel:+9647833655002')">
                             <i class="fas fa-phone"></i>
                             07833655002
@@ -467,11 +468,11 @@
                     </div>
 
                     <div class="setting-card">
-                        <h3><i class="fab fa-whatsapp"></i> واتساب</h3>
-                        <p>تواصل معنا عبر الواتساب</p>
+                        <h3><i class="fab fa-whatsapp"></i> <span data-lang="whatsapp">واتساب</span></h3>
+                        <p data-lang="whatsappDesc">تواصل معنا عبر الواتساب</p>
                         <button class="btn" onclick="window.open('https://wa.me/9647833655002', '_blank')" style="background: #25D366; color: white;">
                             <i class="fab fa-whatsapp"></i>
-                            فتح الواتساب
+                            <span data-lang="openWhatsapp">فتح الواتساب</span>
                         </button>
                     </div>
                 </section>
@@ -511,6 +512,20 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize language system first
+            setTimeout(() => {
+                if (window.languageSystem) {
+                    // Update language selection indicators
+                    const currentLang = window.languageSystem.getCurrentLanguage();
+                    document.querySelectorAll('.language-option').forEach(option => {
+                        option.classList.remove('active');
+                        if (option.dataset.langOption === currentLang) {
+                            option.classList.add('active');
+                        }
+                    });
+                }
+            }, 100);
+            
             initAuth();
             initNavigation();
             initTheme();
@@ -531,7 +546,7 @@
             const signOutBtn = document.getElementById('signOutBtn');
 
             if (user) {
-                userName.textContent = user.displayName || 'المستخدم';
+                userName.textContent = user.displayName || window.languageSystem?.get('welcome') || 'مرحباً بك';
                 userEmail.textContent = user.email;
                 
                 if (user.photoURL) {
@@ -543,8 +558,8 @@
                 signInBtn.style.display = 'none';
                 signOutBtn.style.display = 'flex';
             } else {
-                userName.textContent = 'مرحباً بك';
-                userEmail.textContent = 'قم بتسجيل الدخول لرؤية معلوماتك';
+                userName.textContent = window.languageSystem?.get('welcome') || 'مرحباً بك';
+                userEmail.textContent = window.languageSystem?.get('loginPrompt') || 'قم بتسجيل الدخول لرؤية معلوماتك';
                 userAvatar.innerHTML = '<i class="fas fa-user-circle"></i>';
                 signInBtn.style.display = 'flex';
                 signOutBtn.style.display = 'none';
@@ -638,12 +653,14 @@
             const langOptions = document.querySelectorAll('.language-option');
             langOptions.forEach(option => {
                 option.addEventListener('click', () => {
-                    langOptions.forEach(opt => opt.classList.remove('active'));
-                    option.classList.add('active');
-                    
-                    const lang = option.dataset.lang;
-                    localStorage.setItem('language', lang);
-                    showToast('تم تغيير اللغة');
+                    const lang = option.dataset.langOption;
+                    if (lang && window.languageSystem) {
+                        langOptions.forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
+                        
+                        // Use the language system to change language
+                        window.languageSystem.setLanguage(lang);
+                    }
                 });
             });
         }
