@@ -2951,13 +2951,16 @@
         
         // تعيين لغة المصادقة للعربية
         auth.languageCode = 'ar';
+        
+        // تهيئة Google Auth Provider
+        const googleProvider = new GoogleAuthProvider();
 
         // جعل db ووظائف Firebase متاحة عالميًا
         window.db = db;
         window.collection = collection;
         window.getDocs = getDocs;
         window.auth = auth;
-        window.GoogleAuthProvider = GoogleAuthProvider;
+        window.googleProvider = googleProvider;
         window.signInWithPopup = signInWithPopup;
         window.onAuthStateChanged = onAuthStateChanged;
         window.signOut = signOut;
@@ -3756,7 +3759,6 @@
 
         // Authentication Functions
         let isAuthenticating = false;
-        const googleProvider = new window.GoogleAuthProvider();
 
         // Google Sign-In Function
         async function signInWithGoogle() {
@@ -3768,7 +3770,7 @@
             signInBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري تسجيل الدخول...';
 
             try {
-                const result = await window.signInWithPopup(window.auth, googleProvider);
+                const result = await window.signInWithPopup(window.auth, window.googleProvider);
                 const user = result.user;
                 
                 console.log("Signed in with Google successfully:", user);
