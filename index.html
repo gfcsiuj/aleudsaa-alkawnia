@@ -16,6 +16,9 @@
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- Language System -->
+    <script src="js/language.js"></script>
+    
     <style>
         /* Global Styles */
         :root {
@@ -2443,11 +2446,11 @@
                 
                 <div class="logo">
                     <img src="https://i.imgur.com/JTrI2AU.png" alt="Logo" id="headerLogo">
-                    <h1>العدسة الكونية</h1>
+                    <h1 data-lang="siteName">العدسة الكونية</h1>
                 </div>
                 
                 <div class="search-box">
-                    <input type="text" placeholder="ابحث عن منتجك..." id="searchInput" onkeyup="handleSearch(event)">
+                    <input type="text" data-lang="searchPlaceholder" placeholder="ابحث عن منتجك..." id="searchInput" onkeyup="handleSearch(event)">
                     <button type="button">
                         <i class="fas fa-search"></i>
                     </button>
@@ -2475,43 +2478,43 @@
                 <div class="categories-scroll">
                     <button class="category-link active" onclick="filterByCategory('all')">
                         <i class="fas fa-border-all"></i>
-                        <span>جميع المنتجات</span>
+                        <span data-lang="allProducts">جميع المنتجات</span>
                     </button>
                     <button class="category-link" onclick="filterByCategory('laptop')">
                         <i class="fas fa-laptop"></i>
-                        <span>لابتوبات</span>
+                        <span data-lang="laptops">لابتوبات</span>
                     </button>
                     <button class="category-link" onclick="filterByCategory('desktop')">
                         <i class="fas fa-desktop"></i>
-                        <span>كمبيوترات</span>
+                        <span data-lang="desktops">كمبيوترات</span>
                     </button>
                     <button class="category-link" onclick="filterByCategory('tablet')">
                         <i class="fas fa-tablet-alt"></i>
-                        <span>تابلت</span>
+                        <span data-lang="tablets">تابلت</span>
                     </button>
                     <button class="category-link" onclick="filterByCategory('storage')">
                         <i class="fas fa-hdd"></i>
-                        <span>تخزين</span>
+                        <span data-lang="storage">تخزين</span>
                     </button>
                     <button class="category-link" onclick="filterByCategory('network')">
                         <i class="fas fa-wifi"></i>
-                        <span>شبكات</span>
+                        <span data-lang="network">شبكات</span>
                     </button>
                     <button class="category-link" onclick="filterByCategory('security')">
                         <i class="fas fa-shield-alt"></i>
-                        <span>كاميرات</span>
+                        <span data-lang="security">كاميرات</span>
                     </button>
                     <button class="category-link" onclick="filterByCategory('power')">
                         <i class="fas fa-battery-full"></i>
-                        <span>طاقة</span>
+                        <span data-lang="power">طاقة</span>
                     </button>
                     <button class="category-link" onclick="filterByCategory('accessories')">
                         <i class="fas fa-headphones"></i>
-                        <span>اكسسوارات</span>
+                        <span data-lang="accessories">اكسسوارات</span>
                     </button>
                     <button class="category-link" onclick="filterByCategory('ipphone')">
                         <i class="fas fa-phone-alt"></i>
-                        <span>هواتف IP</span>
+                        <span data-lang="ipPhones">هواتف IP</span>
                     </button>
                 </div>
             </div>
@@ -2525,33 +2528,33 @@
             <div class="hero-carousel">
                 <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=1200');">
                     <div class="hero-content">
-                        <span class="hero-badge">حصري</span>
-                        <h2 class="hero-title">أحدث أجهزة اللابتوب</h2>
-                        <p class="hero-description">تشكيلة واسعة من أفضل الماركات العالمية</p>
+                        <span class="hero-badge" data-lang="heroBadgeExclusive">حصري</span>
+                        <h2 class="hero-title" data-lang="heroTitle1">أحدث أجهزة اللابتوب</h2>
+                        <p class="hero-description" data-lang="heroDesc1">تشكيلة واسعة من أفضل الماركات العالمية</p>
                         <button class="hero-btn" onclick="filterByCategory('laptop')">
-                            تسوق الآن
+                            <span data-lang="heroButton">تسوق الآن</span>
                             <i class="fas fa-arrow-left"></i>
                         </button>
                     </div>
                 </div>
                 <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1598986646512-9330bcc4c0dc?w=1200');">
                     <div class="hero-content">
-                        <span class="hero-badge">جديد</span>
-                        <h2 class="hero-title">كمبيوترات الألعاب</h2>
-                        <p class="hero-description">قوة الأداء وأحدث التقنيات</p>
+                        <span class="hero-badge" data-lang="heroBadgeNew">جديد</span>
+                        <h2 class="hero-title" data-lang="heroTitle2">كمبيوترات الألعاب</h2>
+                        <p class="hero-description" data-lang="heroDesc2">قوة الأداء وأحدث التقنيات</p>
                         <button class="hero-btn" onclick="filterByCategory('desktop')">
-                            اكتشف المزيد
+                            <span data-lang="heroButton2">اكتشف المزيد</span>
                             <i class="fas fa-arrow-left"></i>
                         </button>
                     </div>
                 </div>
                 <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=1200');">
                     <div class="hero-content">
-                        <span class="hero-badge">عرض خاص</span>
-                        <h2 class="hero-title">أجهزة التابلت</h2>
-                        <p class="hero-description">للعمل والترفيه في جهاز واحد</p>
+                        <span class="hero-badge" data-lang="heroBadgeSpecial">عرض خاص</span>
+                        <h2 class="hero-title" data-lang="heroTitle3">أجهزة التابلت</h2>
+                        <p class="hero-description" data-lang="heroDesc3">للعمل والترفيه في جهاز واحد</p>
                         <button class="hero-btn" onclick="filterByCategory('tablet')">
-                            تسوق الآن
+                            <span data-lang="heroButton">تسوق الآن</span>
                             <i class="fas fa-arrow-left"></i>
                         </button>
                     </div>
@@ -2731,30 +2734,30 @@
     <nav class="mobile-nav" id="mobileNav">
         <button class="nav-item active">
             <i class="fas fa-home"></i>
-            <span>الرئيسية</span>
+            <span data-lang="home">الرئيسية</span>
         </button>
         <button class="nav-item" onclick="toggleCart()">
             <i class="fas fa-shopping-bag"></i>
-            <span>السلة</span>
+            <span data-lang="cart">السلة</span>
         </button>
         <button class="nav-item" onclick="toggleWishlist()">
             <i class="far fa-heart"></i>
-            <span>المفضلة</span>
+            <span data-lang="wishlist">المفضلة</span>
         </button>
         <button class="nav-item" onclick="toggleTheme()">
             <i class="fas fa-palette"></i>
-            <span>الثيم</span>
+            <span data-lang="theme">الثيم</span>
         </button>
         <button class="nav-item">
             <i class="far fa-user"></i>
-            <span>حسابي</span>
+            <span data-lang="account">حسابي</span>
         </button>
     </nav>
 
     <!-- Cart Sidebar -->
     <div class="sidebar" id="cartSidebar">
         <div class="sidebar-header">
-            <h3>سلة التسوق</h3>
+            <h3 data-lang="cart">سلة التسوق</h3>
             <button class="close-sidebar" onclick="toggleCart()">
                 <i class="fas fa-times"></i>
             </button>
@@ -2762,18 +2765,18 @@
         <div class="sidebar-body" id="cartItems">
             <div class="empty-state">
                 <i class="fas fa-shopping-basket"></i>
-                <p>السلة فارغة</p>
-                <button class="continue-shopping" onclick="toggleCart()">متابعة التسوق</button>
+                <p data-lang="cartEmpty">السلة فارغة</p>
+                <button class="continue-shopping" onclick="toggleCart()" data-lang="continueShopping">متابعة التسوق</button>
             </div>
         </div>
         <div class="sidebar-footer">
             <div style="display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 20px; font-weight: 700;">
-                <span>المجموع:</span>
+                <span data-lang="total">المجموع:</span>
                 <span id="cartTotal" style="color: var(--primary);">0 د.ع</span>
             </div>
             <button class="checkout-btn" onclick="checkout()">
                 <i class="fab fa-whatsapp"></i>
-                إتمام الطلب عبر واتساب
+                <span data-lang="checkout">إتمام الطلب عبر واتساب</span>
             </button>
         </div>
     </div>
@@ -2781,7 +2784,7 @@
     <!-- Wishlist Sidebar -->
     <div class="sidebar" id="wishlistSidebar">
         <div class="sidebar-header">
-            <h3>قائمة المفضلة</h3>
+            <h3 data-lang="wishlist">قائمة المفضلة</h3>
             <button class="close-sidebar" onclick="toggleWishlist()">
                 <i class="fas fa-times"></i>
             </button>
@@ -2789,8 +2792,8 @@
         <div class="sidebar-body" id="wishlistItems">
             <div class="empty-state">
                 <i class="far fa-heart"></i>
-                <p>المفضلة فارغة</p>
-                <button class="continue-shopping" onclick="toggleWishlist()">متابعة التسوق</button>
+                <p data-lang="wishlistEmpty">المفضلة فارغة</p>
+                <button class="continue-shopping" onclick="toggleWishlist()" data-lang="continueShopping">متابعة التسوق</button>
             </div>
         </div>
     </div>
@@ -3710,9 +3713,14 @@
             return stars;
         }
 
-        function showToast(message) {
+        function showToast(messageKey, fallbackText) {
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toastMessage');
+            
+            // Try to get translation, fallback to provided text or key
+            const message = window.languageSystem ? 
+                (window.languageSystem.get(messageKey) !== messageKey ? window.languageSystem.get(messageKey) : fallbackText || messageKey) : 
+                (fallbackText || messageKey);
             
             toastMessage.textContent = message;
             toast.classList.add('show');
@@ -3895,6 +3903,14 @@
 
         // Initialize authentication when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize language system
+            setTimeout(() => {
+                if (window.languageSystem) {
+                    // Language system is ready, update UI accordingly
+                    console.log('Language system initialized:', window.languageSystem.getCurrentLanguage());
+                }
+            }, 100);
+            
             // Wait for Firebase to be ready
             setTimeout(() => {
                 if (window.auth) {
@@ -3905,27 +3921,31 @@
 
         // Event Listeners for Authentication
         document.addEventListener('DOMContentLoaded', () => {
-            // Account buttons
+            // Account buttons - redirect to account page
             document.querySelectorAll('.icon-btn').forEach(btn => {
                 if (btn.querySelector('.fa-user')) {
-                    btn.addEventListener('click', openAccountModal);
+                    btn.addEventListener('click', () => {
+                        window.location.href = 'account.html';
+                    });
                 }
             });
             
             document.querySelectorAll('.nav-item').forEach(btn => {
                 if (btn.querySelector('.fa-user')) {
-                    btn.addEventListener('click', openAccountModal);
+                    btn.addEventListener('click', () => {
+                        window.location.href = 'account.html';
+                    });
                 }
             });
             
-            // Google Sign-In button
-            const googleBtn = document.getElementById('googleSignInBtn');
-            if (googleBtn) {
-                googleBtn.addEventListener('click', signInWithGoogle);
-            }
-            
-            // Logout button
-            document.getElementById('logoutBtn')?.addEventListener('click', logout);
+            // Mobile bottom nav account button
+            document.querySelectorAll('.mobile-nav .nav-item').forEach(btn => {
+                if (btn.querySelector('.fa-user')) {
+                    btn.addEventListener('click', () => {
+                        window.location.href = 'account.html';
+                    });
+                }
+            });
         });
     </script>
 </body>
