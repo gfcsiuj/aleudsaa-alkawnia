@@ -1747,6 +1747,278 @@
             color: var(--primary);
         }
 
+        /* Account Authentication Modal */
+        .account-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .account-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .account-modal .modal-content {
+            background: var(--surface);
+            border-radius: 20px;
+            max-width: 450px;
+            width: 100%;
+            position: relative;
+            box-shadow: var(--shadow-hover);
+            border: 1px solid var(--border);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .auth-view {
+            padding: 40px 30px;
+        }
+
+        .auth-view h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .auth-description {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            background: var(--surface-light);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 16px;
+            color: var(--text-primary);
+            transition: var(--transition);
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(205, 127, 50, 0.3);
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            font-family: 'Tajawal', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .auth-btn.primary {
+            background: var(--gradient);
+            color: var(--background);
+        }
+
+        [data-theme="bronze"] .auth-btn.primary {
+            color: #000000;
+        }
+
+        [data-theme="blue"] .auth-btn.primary {
+            color: #FFFFFF;
+        }
+
+        .auth-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .auth-btn.secondary {
+            background: var(--surface-light);
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .auth-btn.secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .auth-btn.danger {
+            background: #dc3545;
+            color: #FFFFFF;
+        }
+
+        .auth-btn.danger:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .auth-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .otp-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .auth-status {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .auth-status.success {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border: 1px solid #28a745;
+            display: block;
+        }
+
+        .auth-status.error {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border: 1px solid #dc3545;
+            display: block;
+        }
+
+        .auth-status.info {
+            background: rgba(23, 162, 184, 0.1);
+            color: #17a2b8;
+            border: 1px solid #17a2b8;
+            display: block;
+        }
+
+        /* User Profile View */
+        .user-welcome {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 40px;
+            color: var(--background);
+        }
+
+        [data-theme="bronze"] .user-avatar {
+            color: #000000;
+        }
+
+        [data-theme="blue"] .user-avatar {
+            color: #FFFFFF;
+        }
+
+        .user-phone {
+            color: var(--text-secondary);
+            font-size: 16px;
+            direction: ltr;
+            text-align: center;
+        }
+
+        .user-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* reCAPTCHA styling */
+        #recaptchaContainer {
+            margin: 15px 0;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 480px) {
+            .account-modal {
+                padding: 10px;
+            }
+
+            .account-modal .modal-content {
+                max-width: 100%;
+                margin: 20px 0;
+                border-radius: 15px;
+            }
+
+            .auth-view {
+                padding: 30px 20px;
+            }
+
+            .auth-view h3 {
+                font-size: 20px;
+            }
+
+            .form-group input {
+                padding: 12px;
+            }
+
+            .auth-btn {
+                padding: 12px;
+                font-size: 14px;
+            }
+        }
+
         /* WhatsApp Float */
         .whatsapp-float {
             position: fixed;
@@ -2569,6 +2841,72 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- Account Authentication Modal -->
+    <div class="account-modal" id="accountModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAccountModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <!-- Login View -->
+            <div class="auth-view" id="loginView">
+                <h3>تسجيل الدخول / إنشاء حساب</h3>
+                <p class="auth-description">سجل دخولك باستخدام رقم الهاتف لمتابعة طلباتك والاستفادة من العروض الخاصة</p>
+                
+                <div class="form-group">
+                    <label for="phoneNumberInput">رقم الهاتف</label>
+                    <input type="tel" id="phoneNumberInput" placeholder="+964XXXXXXXXX" dir="ltr">
+                    <small>مثال: +9647XXXXXXXX</small>
+                </div>
+                
+                <div id="recaptchaContainer"></div>
+                
+                <button id="sendOtpBtn" class="auth-btn primary">
+                    <i class="fas fa-paper-plane"></i>
+                    إرسال رمز التحقق
+                </button>
+                
+                <div class="otp-section" id="otpSection" style="display: none;">
+                    <div class="form-group">
+                        <label for="otpInput">رمز التحقق</label>
+                        <input type="text" id="otpInput" placeholder="XXXXXX" maxlength="6" dir="ltr">
+                        <small>أدخل الرمز المرسل عبر الرسائل النصية</small>
+                    </div>
+                    
+                    <button id="verifyOtpBtn" class="auth-btn primary">
+                        <i class="fas fa-check"></i>
+                        تحقق من الرمز
+                    </button>
+                </div>
+                
+                <p id="authStatus" class="auth-status"></p>
+            </div>
+            
+            <!-- User Profile View -->
+            <div class="auth-view" id="userProfileView" style="display: none;">
+                <div class="user-welcome">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>أهلاً بك!</h3>
+                    <p class="user-phone" id="userPhoneNumber"></p>
+                </div>
+                
+                <div class="user-actions">
+                    <button class="auth-btn secondary" onclick="closeAccountModal()">
+                        <i class="fas fa-shopping-bag"></i>
+                        متابعة التسوق
+                    </button>
+                    
+                    <button id="logoutBtn" class="auth-btn danger">
+                        <i class="fas fa-sign-out-alt"></i>
+                        تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
 
@@ -2578,6 +2916,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
         // تكوين Firebase
         const firebaseConfig = {
@@ -2594,9 +2933,20 @@
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        // تعيين لغة المصادقة للعربية
+        auth.languageCode = 'ar';
 
-        // جعل db متاحًا عالميًا
+        // جعل db ووظائف Firebase متاحة عالميًا
         window.db = db;
+        window.collection = collection;
+        window.getDocs = getDocs;
+        window.auth = auth;
+        window.RecaptchaVerifier = RecaptchaVerifier;
+        window.signInWithPhoneNumber = signInWithPhoneNumber;
+        window.onAuthStateChanged = onAuthStateChanged;
+        window.signOut = signOut;
     </script>
 
     <!-- Main JavaScript -->
@@ -2817,8 +3167,8 @@
             
             try {
                 // جلب المنتجات من Firestore
-                const productsCollection = collection(window.db, 'products');
-                const productsSnapshot = await getDocs(productsCollection);
+                const productsCollection = window.collection(window.db, 'products');
+                const productsSnapshot = await window.getDocs(productsCollection);
                 
                 // تحويل البيانات إلى مصفوفة
                 const products = [];
@@ -3375,6 +3725,7 @@
             document.getElementById('wishlistSidebar').classList.remove('active');
             document.getElementById('mobileMenu').classList.remove('active');
             document.getElementById('productModal').classList.remove('active');
+            document.getElementById('accountModal').classList.remove('active');
             document.getElementById('overlay').classList.remove('active');
             document.querySelector('.mobile-menu-btn')?.classList.remove('active');
             document.body.style.overflow = '';
@@ -3387,6 +3738,264 @@
             if (searchBox && !searchBox.contains(e.target)) {
                 searchResults?.classList.remove('active');
             }
+        });
+
+        // Authentication Functions
+        let confirmationResult = null;
+        let isAuthenticating = false;
+
+        // Setup reCAPTCHA
+        function setupRecaptcha() {
+            if (window.recaptchaVerifier) {
+                window.recaptchaVerifier.clear();
+            }
+            
+            window.recaptchaVerifier = new window.RecaptchaVerifier(window.auth, 'recaptchaContainer', {
+                'size': 'invisible',
+                'callback': (response) => {
+                    // reCAPTCHA solved - تم حل الكابتشا
+                    console.log('reCAPTCHA solved');
+                },
+                'expired-callback': () => {
+                    // reCAPTCHA expired - انتهت صلاحية الكابتشا
+                    showAuthStatus('انتهت صلاحية التحقق، يرجى المحاولة مرة أخرى', 'error');
+                }
+            });
+        }
+
+        // Send OTP
+        async function sendOTP() {
+            const phoneNumber = document.getElementById('phoneNumberInput').value.trim();
+            
+            if (!phoneNumber) {
+                showAuthStatus('يرجى إدخال رقم الهاتف', 'error');
+                return;
+            }
+
+            // Validate phone number format
+            const phoneRegex = /^\+964[0-9]{10}$/;
+            if (!phoneRegex.test(phoneNumber)) {
+                showAuthStatus('يرجى إدخال رقم هاتف صحيح بصيغة +964XXXXXXXXX', 'error');
+                return;
+            }
+
+            if (isAuthenticating) return;
+            isAuthenticating = true;
+
+            const sendBtn = document.getElementById('sendOtpBtn');
+            sendBtn.disabled = true;
+            sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+            
+            try {
+                setupRecaptcha();
+                confirmationResult = await window.signInWithPhoneNumber(window.auth, phoneNumber, window.recaptchaVerifier);
+                
+                // Show OTP input section
+                document.getElementById('otpSection').style.display = 'block';
+                document.getElementById('phoneNumberInput').disabled = true;
+                sendBtn.style.display = 'none';
+                
+                showAuthStatus('تم إرسال رمز التحقق إلى رقم هاتفك', 'success');
+                document.getElementById('otpInput').focus();
+                
+            } catch (error) {
+                console.error('Error sending OTP:', error);
+                let errorMessage = 'حدث خطأ في إرسال رمز التحقق';
+                
+                if (error.code === 'auth/invalid-phone-number') {
+                    errorMessage = 'رقم الهاتف غير صحيح';
+                } else if (error.code === 'auth/too-many-requests') {
+                    errorMessage = 'تم إرسال رسائل كثيرة، يرجى المحاولة لاحقاً';
+                } else if (error.code === 'auth/captcha-check-failed') {
+                    errorMessage = 'فشل في التحقق من الأمان، يرجى المحاولة مرة أخرى';
+                }
+                
+                showAuthStatus(errorMessage, 'error');
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال رمز التحقق';
+            } finally {
+                isAuthenticating = false;
+            }
+        }
+
+        // Verify OTP
+        async function verifyOTP() {
+            const otpCode = document.getElementById('otpInput').value.trim();
+            
+            if (!otpCode) {
+                showAuthStatus('يرجى إدخال رمز التحقق', 'error');
+                return;
+            }
+
+            if (otpCode.length !== 6) {
+                showAuthStatus('رمز التحقق يجب أن يكون 6 أرقام', 'error');
+                return;
+            }
+
+            if (!confirmationResult) {
+                showAuthStatus('يرجى إرسال رمز التحقق أولاً', 'error');
+                return;
+            }
+
+            const verifyBtn = document.getElementById('verifyOtpBtn');
+            verifyBtn.disabled = true;
+            verifyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحقق...';
+            
+            try {
+                const result = await confirmationResult.confirm(otpCode);
+                const user = result.user;
+                
+                showAuthStatus('تم تسجيل الدخول بنجاح!', 'success');
+                
+                // Reset form and close modal after delay
+                setTimeout(() => {
+                    resetAuthForm();
+                    closeAccountModal();
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Error verifying OTP:', error);
+                let errorMessage = 'رمز التحقق غير صحيح';
+                
+                if (error.code === 'auth/invalid-verification-code') {
+                    errorMessage = 'رمز التحقق غير صحيح';
+                } else if (error.code === 'auth/code-expired') {
+                    errorMessage = 'انتهت صلاحية رمز التحقق';
+                }
+                
+                showAuthStatus(errorMessage, 'error');
+                verifyBtn.disabled = false;
+                verifyBtn.innerHTML = '<i class="fas fa-check"></i> تحقق من الرمز';
+            }
+        }
+
+        // Logout
+        async function logout() {
+            try {
+                await window.signOut(window.auth);
+                showToast('تم تسجيل الخروج بنجاح');
+                closeAccountModal();
+            } catch (error) {
+                console.error('Error signing out:', error);
+                showToast('حدث خطأ في تسجيل الخروج');
+            }
+        }
+
+        // Show authentication status messages
+        function showAuthStatus(message, type) {
+            const statusElement = document.getElementById('authStatus');
+            statusElement.textContent = message;
+            statusElement.className = `auth-status ${type}`;
+            statusElement.style.display = 'block';
+            
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 5000);
+        }
+
+        // Reset authentication form
+        function resetAuthForm() {
+            document.getElementById('phoneNumberInput').value = '';
+            document.getElementById('phoneNumberInput').disabled = false;
+            document.getElementById('otpInput').value = '';
+            document.getElementById('otpSection').style.display = 'none';
+            document.getElementById('sendOtpBtn').style.display = 'block';
+            document.getElementById('sendOtpBtn').disabled = false;
+            document.getElementById('sendOtpBtn').innerHTML = '<i class="fas fa-paper-plane"></i> إرسال رمز التحقق';
+            document.getElementById('verifyOtpBtn').disabled = false;
+            document.getElementById('verifyOtpBtn').innerHTML = '<i class="fas fa-check"></i> تحقق من الرمز';
+            document.getElementById('authStatus').style.display = 'none';
+            confirmationResult = null;
+            
+            // Clear reCAPTCHA
+            if (window.recaptchaVerifier) {
+                window.recaptchaVerifier.clear();
+            }
+        }
+
+        // Authentication State Management
+        function initAuthState() {
+            window.onAuthStateChanged(window.auth, (user) => {
+                if (user) {
+                    // User is signed in
+                    document.getElementById('loginView').style.display = 'none';
+                    document.getElementById('userProfileView').style.display = 'block';
+                    document.getElementById('userPhoneNumber').textContent = user.phoneNumber;
+                } else {
+                    // User is signed out
+                    document.getElementById('loginView').style.display = 'block';
+                    document.getElementById('userProfileView').style.display = 'none';
+                    resetAuthForm();
+                }
+            });
+        }
+
+        // Modal Functions
+        function openAccountModal() {
+            const modal = document.getElementById('accountModal');
+            const overlay = document.getElementById('overlay');
+            
+            modal.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAccountModal() {
+            const modal = document.getElementById('accountModal');
+            const overlay = document.getElementById('overlay');
+            
+            modal.classList.remove('active');
+            // Only close overlay if no other modals are active
+            if (!document.querySelector('.product-modal.active') && 
+                !document.querySelector('.sidebar.active')) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Initialize authentication when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Wait for Firebase to be ready
+            setTimeout(() => {
+                if (window.auth) {
+                    initAuthState();
+                }
+            }, 1000);
+        });
+
+        // Event Listeners for Authentication
+        document.addEventListener('DOMContentLoaded', () => {
+            // Account buttons
+            document.querySelectorAll('.icon-btn').forEach(btn => {
+                if (btn.querySelector('.fa-user')) {
+                    btn.addEventListener('click', openAccountModal);
+                }
+            });
+            
+            document.querySelectorAll('.nav-item').forEach(btn => {
+                if (btn.querySelector('.fa-user')) {
+                    btn.addEventListener('click', openAccountModal);
+                }
+            });
+            
+            // Auth form buttons
+            document.getElementById('sendOtpBtn')?.addEventListener('click', sendOTP);
+            document.getElementById('verifyOtpBtn')?.addEventListener('click', verifyOTP);
+            document.getElementById('logoutBtn')?.addEventListener('click', logout);
+            
+            // Phone number input - Enter key to send OTP
+            document.getElementById('phoneNumberInput')?.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendOTP();
+                }
+            });
+            
+            // OTP input - Enter key to verify
+            document.getElementById('otpInput')?.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    verifyOTP();
+                }
+            });
         });
     </script>
 </body>
