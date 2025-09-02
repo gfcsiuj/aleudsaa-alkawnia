@@ -1,0 +1,182 @@
+<svg viewBox="0 0 960 960" xmlns="http://www.w3.org/2000/svg" width="400" height="400">
+  <defs>
+    <!-- تدرج لوني ذهبي -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgb(255,215,100);stop-opacity:1" />
+      <stop offset="50%" style="stop-color:rgb(240,168,63);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(220,140,40);stop-opacity:1" />
+    </linearGradient>
+
+    <!-- قناع للملء التدريجي من الأسفل إلى الأعلى -->
+    <mask id="fillMask">
+      <rect x="0" y="0" width="960" height="0" fill="white">
+        <animate attributeName="height" 
+                 from="0" 
+                 to="960" 
+                 dur="2s" 
+                 begin="3s"
+                 fill="freeze"/>
+        <animate attributeName="y" 
+                 from="960" 
+                 to="0" 
+                 dur="2s" 
+                 begin="3s"
+                 fill="freeze"/>
+      </rect>
+    </mask>
+
+    <!-- تأثير التوهج -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- تأثير الظل -->
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="5" stdDeviation="10" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- الأنماط CSS داخل SVG -->
+    <style>
+      @keyframes drawStroke {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          transform: scale(1);
+          transform-origin: center;
+        }
+        50% {
+          transform: scale(1.02);
+          transform-origin: center;
+        }
+      }
+
+      @keyframes shimmer {
+        0% {
+          fill: url(#goldGradient);
+        }
+        50% {
+          fill: rgb(255,200,80);
+        }
+        100% {
+          fill: url(#goldGradient);
+        }
+      }
+
+      .stroke-path {
+        fill: none;
+        stroke: rgb(240,168,63);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .path1 {
+        stroke-dasharray: 4000;
+        stroke-dashoffset: 4000;
+        animation: drawStroke 2s ease-in-out forwards;
+      }
+
+      .path2 {
+        stroke-dasharray: 2000;
+        stroke-dashoffset: 2000;
+        animation: drawStroke 1.5s ease-in-out 0.5s forwards;
+      }
+
+      .path3 {
+        stroke-dasharray: 2000;
+        stroke-dashoffset: 2000;
+        animation: drawStroke 1.5s ease-in-out 0.8s forwards;
+      }
+
+      .fill-path {
+        fill: url(#goldGradient);
+      }
+
+      .complete-animation {
+        animation: pulse 2s ease-in-out 5s infinite, shimmer 3s ease-in-out 5.5s infinite;
+      }
+
+      .glow-animation {
+        opacity: 0;
+        animation: fadeIn 1s ease-in-out 4.5s forwards;
+      }
+    </style>
+  </defs>
+
+  <!-- خلفية خفيفة -->
+  <rect width="960" height="960" fill="none"/>
+
+  <!-- المجموعة الرئيسية مع تأثير الظل -->
+  <g filter="url(#shadow)">
+    
+    <!-- رسم الخطوط الخارجية -->
+    <!-- المسار الأول -->
+    <path class="stroke-path path1" 
+          d="M 401.5 149 Q 479.7282 148.2718 534.5 171 Q 598.9724 198.0276 644 244.5 L 647.5 248 L 657.5 259 Q 701.7238 238.7238 754.5 227 Q 782.9685 219.4685 820.5 221 Q 844.9352 222.5648 856 237.5 Q 859.8182 242.1818 859 251.5 L 852 269.5 L 829 302.5 L 786.5 347 Q 721.1155 404.6155 649.5 456 L 403.5 625 L 328.5 683 L 288 720.5 L 275 743.5 L 273 763.5 L 275 770 Q 219.9447 744.3875 180 702.5 Q 142.625 663.375 118 611.5 L 100 562.5 Q 93.5551 542.4449 92 517.5 L 94.5 519 Q 139.2727 547.7273 216.5 544 Q 251.7647 541.2647 282.5 534 L 343.5 517 Q 420.9098 489.4098 491.5 455 Q 576.6966 414.6966 653.5 366 L 723.5 320 Q 747.3261 304.3261 766 283.5 Q 774.8548 276.8548 775 261.5 L 769.5 254 Q 762.75 249.75 750.5 251 Q 704.2277 257.2277 668 273.5 L 702 316.5 Q 568.1083 405.6083 407.5 468 Q 357.3584 487.3584 302.5 502 L 239.5 514 L 204.5 517 L 184.5 517 Q 126.2754 514.5231 93 488 L 92 480.5 Q 93.3977 440.3977 101 406.5 L 122 344.5 Q 150.4915 282.9915 196.5 239 Q 235.5659 200.0659 289.5 176 Q 336.9504 153.9504 401.5 149 Z"/>
+
+    <!-- المسار الثاني -->
+    <path class="stroke-path path2" 
+          d="M 739.5 406 L 745 432.5 L 554.5 585 L 487 646.5 L 482.5 652 L 476 657.5 Q 444.702 688.202 420 725.5 L 403 760.5 L 399 784.5 L 402 801 L 364.5 802 L 332.5 795 L 316 783.5 Q 311.1667 777.8333 311 767.5 Q 314.0675 747.0675 325 734.5 L 361.5 695 L 364.5 693 Q 407.1953 651.1953 455.5 615 L 677.5 456 L 739.5 406 Z"/>
+
+    <!-- المسار الثالث -->
+    <path class="stroke-path path3" 
+          d="M 749.5 453 L 751 453.5 L 751 496.5 Q 747.6273 536.6273 738 570.5 L 720 617.5 Q 689.0694 679.0694 639.5 722 Q 604.6103 753.1103 560.5 775 Q 527.0224 793.2773 481 798 Q 471.9042 782.8893 474 755.5 L 480 730.5 L 499 691.5 Q 523.8775 652.8775 556.5 622 L 562 617.5 L 568.5 610 L 571.5 608 L 601.5 579 L 707.5 492 L 749.5 453 Z"/>
+
+    <!-- المسارات الملئة بالألوان مع قناع الملء من الأسفل -->
+    <g mask="url(#fillMask)" class="fill-path complete-animation">
+      <path fill="url(#goldGradient)" 
+            d="M 401.5 149 Q 479.7282 148.2718 534.5 171 Q 598.9724 198.0276 644 244.5 L 647.5 248 L 657.5 259 Q 701.7238 238.7238 754.5 227 Q 782.9685 219.4685 820.5 221 Q 844.9352 222.5648 856 237.5 Q 859.8182 242.1818 859 251.5 L 852 269.5 L 829 302.5 L 786.5 347 Q 721.1155 404.6155 649.5 456 L 403.5 625 L 328.5 683 L 288 720.5 L 275 743.5 L 273 763.5 L 275 770 Q 219.9447 744.3875 180 702.5 Q 142.625 663.375 118 611.5 L 100 562.5 Q 93.5551 542.4449 92 517.5 L 94.5 519 Q 139.2727 547.7273 216.5 544 Q 251.7647 541.2647 282.5 534 L 343.5 517 Q 420.9098 489.4098 491.5 455 Q 576.6966 414.6966 653.5 366 L 723.5 320 Q 747.3261 304.3261 766 283.5 Q 774.8548 276.8548 775 261.5 L 769.5 254 Q 762.75 249.75 750.5 251 Q 704.2277 257.2277 668 273.5 L 702 316.5 Q 568.1083 405.6083 407.5 468 Q 357.3584 487.3584 302.5 502 L 239.5 514 L 204.5 517 L 184.5 517 Q 126.2754 514.5231 93 488 L 92 480.5 Q 93.3977 440.3977 101 406.5 L 122 344.5 Q 150.4915 282.9915 196.5 239 Q 235.5659 200.0659 289.5 176 Q 336.9504 153.9504 401.5 149 Z"/>
+
+      <path fill="url(#goldGradient)" 
+            d="M 739.5 406 L 745 432.5 L 554.5 585 L 487 646.5 L 482.5 652 L 476 657.5 Q 444.702 688.202 420 725.5 L 403 760.5 L 399 784.5 L 402 801 L 364.5 802 L 332.5 795 L 316 783.5 Q 311.1667 777.8333 311 767.5 Q 314.0675 747.0675 325 734.5 L 361.5 695 L 364.5 693 Q 407.1953 651.1953 455.5 615 L 677.5 456 L 739.5 406 Z"/>
+
+      <path fill="url(#goldGradient)" 
+            d="M 749.5 453 L 751 453.5 L 751 496.5 Q 747.6273 536.6273 738 570.5 L 720 617.5 Q 689.0694 679.0694 639.5 722 Q 604.6103 753.1103 560.5 775 Q 527.0224 793.2773 481 798 Q 471.9042 782.8893 474 755.5 L 480 730.5 L 499 691.5 Q 523.8775 652.8775 556.5 622 L 562 617.5 L 568.5 610 L 571.5 608 L 601.5 579 L 707.5 492 L 749.5 453 Z"/>
+    </g>
+
+    <!-- تأثير التوهج -->
+    <g filter="url(#glow)" class="glow-animation">
+      <path fill="rgb(255,215,100)" 
+            opacity="0.2"
+            d="M 401.5 149 Q 479.7282 148.2718 534.5 171 Q 598.9724 198.0276 644 244.5 L 647.5 248 L 657.5 259 Q 701.7238 238.7238 754.5 227 Q 782.9685 219.4685 820.5 221 Q 844.9352 222.5648 856 237.5 Q 859.8182 242.1818 859 251.5 L 852 269.5 L 829 302.5 L 786.5 347 Q 721.1155 404.6155 649.5 456 L 403.5 625 L 328.5 683 L 288 720.5 L 275 743.5 L 273 763.5 L 275 770 Q 219.9447 744.3875 180 702.5 Q 142.625 663.375 118 611.5 L 100 562.5 Q 93.5551 542.4449 92 517.5 L 94.5 519 Q 139.2727 547.7273 216.5 544 Q 251.7647 541.2647 282.5 534 L 343.5 517 Q 420.9098 489.4098 491.5 455 Q 576.6966 414.6966 653.5 366 L 723.5 320 Q 747.3261 304.3261 766 283.5 Q 774.8548 276.8548 775 261.5 L 769.5 254 Q 762.75 249.75 750.5 251 Q 704.2277 257.2277 668 273.5 L 702 316.5 Q 568.1083 405.6083 407.5 468 Q 357.3584 487.3584 302.5 502 L 239.5 514 L 204.5 517 L 184.5 517 Q 126.2754 514.5231 93 488 L 92 480.5 Q 93.3977 440.3977 101 406.5 L 122 344.5 Q 150.4915 282.9915 196.5 239 Q 235.5659 200.0659 289.5 176 Q 336.9504 153.9504 401.5 149 Z"/>
+    </g>
+
+    <!-- جزيئات متحركة تظهر عند الملء -->
+    <circle r="3" fill="rgb(255,200,100)" opacity="0">
+      <animate attributeName="opacity" values="0;0;0;1;0" dur="2s" begin="3s" repeatCount="3"/>
+      <animateMotion path="M 400,800 L 400,200" dur="2s" begin="3s" repeatCount="3"/>
+    </circle>
+
+    <circle r="2" fill="rgb(240,168,63)" opacity="0">
+      <animate attributeName="opacity" values="0;0;0;1;0" dur="2s" begin="3.2s" repeatCount="3"/>
+      <animateMotion path="M 300,800 L 300,200" dur="2s" begin="3.2s" repeatCount="3"/>
+    </circle>
+
+    <circle r="2.5" fill="rgb(255,215,100)" opacity="0">
+      <animate attributeName="opacity" values="0;0;0;1;0" dur="2s" begin="3.4s" repeatCount="3"/>
+      <animateMotion path="M 500,800 L 500,200" dur="2s" begin="3.4s" repeatCount="3"/>
+    </circle>
+
+    <circle r="2" fill="rgb(255,200,100)" opacity="0">
+      <animate attributeName="opacity" values="0;0;0;1;0" dur="2s" begin="3.6s" repeatCount="3"/>
+      <animateMotion path="M 600,800 L 600,200" dur="2s" begin="3.6s" repeatCount="3"/>
+    </circle>
+  </g>
+</svg>
