@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#FF7A00">
-    <meta name="description" content="العدسة الكونية - تقنية بلا حدود">
+    <meta name="description" content="العدسة الكونية - متجرك الأول للتقنية الفاخرة. لابتوبات، شاشات، وملحقات بأفضل الأسعار">
+    <meta name="keywords" content="لابتوب, شاشات, تقنية, ماك بوك, ديل, اسوس, العراق">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="og:title" content="العدسة الكونية | متجر التقنية الفاخر">
+    <meta property="og:description" content="تسوق أحدث الأجهزة التقنية بأفضل الأسعار">
+    <meta property="og:type" content="website">
     <title>العدسة الكونية | متجر التقنية الفاخر</title>
+    <link rel="icon" type="image/png" href="https://www2.0zz0.com/2025/09/01/19/508183112.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap');
@@ -27,6 +33,7 @@
             --gray-3: #999999;
             --gray-4: #666666;
             --success: #4CAF50;
+            --compare: #2196F3;
             
             --gradient-orange: linear-gradient(135deg, #FF7A00 0%, #FFA64D 100%);
             --gradient-dark: linear-gradient(180deg, #0A0A0A 0%, #1A1A1A 100%);
@@ -51,6 +58,9 @@
             --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
             --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
             --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            
+            --nav-animation-duration: 600ms;
+            --nav-smooth-ease: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -77,7 +87,115 @@
             color: var(--white);
         }
 
-        /* Dark Mode Styles - Fixed */
+        /* Modern Premium Loader - Updated for theme */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #FFFFFF;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s var(--ease-out), visibility 0.5s var(--ease-out);
+        }
+
+        body.dark-mode #loader {
+            background: #0F0F0F;
+        }
+
+        #loader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .loader-logo {
+            width: 160px;
+            height: 160px;
+            animation: logoPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes logoPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+        }
+
+        .progress-bar-container {
+            width: 200px;
+            height: 6px;
+            background-color: rgba(255, 122, 0, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        body.dark-mode .progress-bar-container {
+            background-color: rgba(255, 122, 0, 0.2);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-orange);
+            border-radius: 3px;
+            transform: translateX(-100%);
+            animation: fillProgressBar 4s var(--ease) forwards;
+        }
+
+        @keyframes fillProgressBar {
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .loader-subtitle {
+            font-size: 14px;
+            color: var(--gray-3);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        body.dark-mode .loader-subtitle {
+            color: var(--gray-2);
+        }
+
+        /* Flying Product Animation */
+        .flying-product {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            background: var(--orange);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            animation: flyToCart 0.8s var(--ease-out) forwards;
+        }
+
+        @keyframes flyToCart {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(var(--mid-x), var(--mid-y)) scale(0.8);
+            }
+            100% {
+                transform: translate(var(--end-x), var(--end-y)) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        /* Dark Mode Styles */
         body.dark-mode .header {
             background: rgba(15,15,15,0.95);
             border-bottom-color: rgba(255,255,255,0.1);
@@ -184,161 +302,23 @@
             background: var(--dark-card);
         }
 
-        /* Premium Creative Loader */
-        #loader {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        #loader.hide {
-            animation: loaderFadeOut 1s var(--ease) forwards;
-        }
-
-        @keyframes loaderFadeOut {
-            to {
-                opacity: 0;
-                visibility: hidden;
-                pointer-events: none;
-            }
-        }
-
-        /* Creative Laptop Formation Animation */
-        .loader-creative {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Sand Particles forming laptop */
-        .sand-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .sand-particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--orange);
-            border-radius: 50%;
-            opacity: 0;
-            animation: sandForm 3s var(--ease) infinite;
-        }
-
-        @keyframes sandForm {
-            0% {
-                transform: translate(var(--start-x), var(--start-y)) scale(0);
-                opacity: 0;
-            }
-            30% {
-                opacity: 1;
-            }
-            60% {
-                transform: translate(var(--end-x), var(--end-y)) scale(1.5);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--end-x), var(--end-y)) scale(1);
-                opacity: 0.8;
-            }
-        }
-
-        /* Laptop SVG Icon */
-        .laptop-icon {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            opacity: 0;
-            animation: laptopReveal 3s var(--ease) forwards;
-            animation-delay: 1s;
-        }
-
-        @keyframes laptopReveal {
-            to {
-                opacity: 1;
-                transform: scale(1.1);
-            }
-        }
-
-        .laptop-icon svg {
-            width: 100%;
-            height: 100%;
-            stroke: var(--orange);
-            stroke-width: 2;
-            fill: none;
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: drawLaptop 2s var(--ease) forwards;
-            animation-delay: 0.5s;
-        }
-
-        @keyframes drawLaptop {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        /* Elegant Text */
-        .loader-brand {
-            position: absolute;
-            bottom: 60px;
-            text-align: center;
-            opacity: 0;
-            animation: fadeInUp 1s var(--ease) forwards;
-            animation-delay: 1.5s;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(-20px);
-            }
-        }
-
-        .loader-brand-text {
-            font-size: 28px;
-            font-weight: 900;
-            background: var(--gradient-orange);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
-        }
-
-        .loader-brand-sub {
-            font-size: 12px;
-            color: var(--gray-3);
-            margin-top: 5px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        /* Header */
+        /* Header with Glassmorphism */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             height: 70px;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
             z-index: 100;
             padding: 0 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
             transition: all 0.3s var(--ease);
         }
 
@@ -357,34 +337,19 @@
         .logo {
             width: 45px;
             height: 45px;
-            background: var(--gradient-orange);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 24px rgba(255,122,0,0.25);
             position: relative;
             overflow: hidden;
         }
 
-        .logo::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--gradient-shine);
-            animation: shine 3s ease-in-out infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(200%); }
-        }
-
-        .logo svg {
-            width: 24px;
-            height: 24px;
-            position: relative;
-            z-index: 1;
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
         }
 
         .brand-name {
@@ -405,7 +370,8 @@
             width: 42px;
             height: 42px;
             border: none;
-            background: var(--gray-1);
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(10px);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -413,6 +379,10 @@
             cursor: pointer;
             transition: all 0.3s var(--ease-smooth);
             position: relative;
+        }
+
+        body.dark-mode .header-btn {
+            background: rgba(36,36,36,0.6);
         }
 
         .header-btn:hover {
@@ -441,6 +411,45 @@
             50% { transform: scale(1.2); }
         }
 
+        /* Voice Search Button */
+        .voice-search-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            background: var(--orange);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s var(--ease);
+        }
+
+        .voice-search-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 20px rgba(255,122,0,0.4);
+        }
+
+        .voice-search-btn.listening {
+            animation: voicePulse 1.5s infinite;
+        }
+
+        @keyframes voicePulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255,122,0,0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(255,122,0,0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255,122,0,0);
+            }
+        }
+
         /* Notifications Panel */
         .notifications-panel {
             position: fixed;
@@ -448,7 +457,8 @@
             right: 20px;
             width: 320px;
             max-height: 400px;
-            background: var(--white);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px) saturate(180%);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-xl);
             opacity: 0;
@@ -457,10 +467,12 @@
             transition: all 0.3s var(--ease-smooth);
             z-index: 150;
             overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         body.dark-mode .notifications-panel {
-            background: var(--dark-card);
+            background: rgba(36,36,36,0.95);
+            border-color: rgba(255,255,255,0.1);
         }
 
         .notifications-panel.active {
@@ -471,7 +483,7 @@
 
         .notifications-header {
             padding: 15px 20px;
-            border-bottom: 1px solid var(--gray-2);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -503,7 +515,7 @@
 
         .notification-item {
             padding: 15px 20px;
-            border-bottom: 1px solid var(--gray-1);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
             cursor: pointer;
             transition: all 0.2s var(--ease);
         }
@@ -513,11 +525,11 @@
         }
 
         .notification-item:hover {
-            background: var(--gray-1);
+            background: rgba(0,0,0,0.02);
         }
 
         body.dark-mode .notification-item:hover {
-            background: var(--black);
+            background: rgba(255,255,255,0.02);
         }
 
         .notification-item:last-child {
@@ -561,7 +573,8 @@
             width: 42px;
             height: 42px;
             border: none;
-            background: var(--gray-1);
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(10px);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -573,7 +586,7 @@
         }
 
         body.dark-mode .theme-toggle-btn {
-            background: var(--dark-card);
+            background: rgba(36,36,36,0.6);
         }
 
         .theme-toggle-btn:hover {
@@ -611,11 +624,15 @@
             position: fixed;
             inset: 0;
             background: rgba(255,255,255,0.98);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(30px) saturate(180%);
             z-index: 200;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s var(--ease-smooth);
+        }
+
+        body.dark-mode .search-overlay {
+            background: rgba(0,0,0,0.98);
         }
 
         .search-overlay.active {
@@ -635,15 +652,26 @@
             margin-bottom: 20px;
         }
 
-        .search-input {
+        .search-input-wrapper {
             flex: 1;
-            padding: 16px 20px;
-            background: var(--gray-1);
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 55px 16px 20px;
+            background: rgba(0,0,0,0.03);
+            backdrop-filter: blur(10px);
             border: 2px solid transparent;
             border-radius: var(--radius-md);
             font-size: 16px;
             font-family: inherit;
             transition: all 0.3s var(--ease);
+        }
+
+        body.dark-mode .search-input {
+            background: rgba(255,255,255,0.05);
+            color: var(--white);
         }
 
         .search-input:focus {
@@ -671,6 +699,60 @@
             background: var(--orange);
         }
 
+        /* Search History */
+        .search-history {
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .search-history-title {
+            font-size: 12px;
+            color: var(--gray-3);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-history-clear {
+            color: var(--orange);
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        /* Search Categories */
+        .search-categories {
+            display: flex;
+            gap: 10px;
+            padding: 15px 20px;
+            background: rgba(0,0,0,0.02);
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        body.dark-mode .search-categories {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .search-category {
+            padding: 8px 16px;
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            font-size: 13px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s var(--ease);
+        }
+
+        body.dark-mode .search-category {
+            background: var(--dark-card);
+        }
+
+        .search-category.active {
+            background: var(--orange);
+            color: var(--white);
+        }
+
         .search-suggestions {
             padding: 0 20px;
             margin-bottom: 20px;
@@ -690,11 +772,16 @@
 
         .suggestion-tag {
             padding: 8px 16px;
-            background: var(--gray-1);
+            background: rgba(0,0,0,0.03);
+            backdrop-filter: blur(10px);
             border-radius: var(--radius-xl);
             font-size: 13px;
             cursor: pointer;
             transition: all 0.2s var(--ease);
+        }
+
+        body.dark-mode .suggestion-tag {
+            background: rgba(255,255,255,0.05);
         }
 
         .suggestion-tag:hover {
@@ -715,10 +802,15 @@
             gap: 15px;
             padding: 15px;
             margin-bottom: 10px;
-            background: var(--white);
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
             border-radius: var(--radius-md);
             cursor: pointer;
             transition: all 0.3s var(--ease-smooth);
+        }
+
+        body.dark-mode .search-result-item {
+            background: rgba(36,36,36,0.8);
         }
 
         .search-result-item:hover {
@@ -767,13 +859,69 @@
             }
         }
 
-        /* Enhanced Filter Section */
+        /* Suggestions Section - Updated for responsive grid */
+        .suggestions-section {
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: 1024px) {
+            .suggestions-section {
+                padding: 20px 60px;
+            }
+        }
+
+        .suggestions-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .suggestions-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--black);
+        }
+
+        body.dark-mode .suggestions-title {
+            color: var(--white);
+        }
+
+        .suggestions-subtitle {
+            font-size: 14px;
+            color: var(--gray-3);
+            margin-top: 5px;
+        }
+
+        /* Updated suggestions grid */
+        .suggestions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        @media (min-width: 1024px) {
+            .suggestions-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+        }
+
+        /* Enhanced Filter Section - Fixed */
         .filter-section {
             padding: 15px 20px;
-            background: var(--white);
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(20px) saturate(180%);
             margin: 0 20px 20px;
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        body.dark-mode .filter-section {
+            background: rgba(36,36,36,0.8);
+            border-color: rgba(255,255,255,0.1);
         }
 
         @media (min-width: 1024px) {
@@ -832,13 +980,18 @@
 
         .filter-chip {
             padding: 8px 16px;
-            background: var(--gray-1);
+            background: rgba(0,0,0,0.03);
+            backdrop-filter: blur(10px);
             border: 2px solid transparent;
             border-radius: var(--radius-xl);
             font-size: 13px;
             white-space: nowrap;
             cursor: pointer;
             transition: all 0.2s var(--ease);
+        }
+
+        body.dark-mode .filter-chip {
+            background: rgba(255,255,255,0.05);
         }
 
         .filter-chip:hover {
@@ -852,7 +1005,7 @@
             border-color: var(--orange);
         }
 
-        /* Custom Price Range Slider */
+        /* Enhanced Price Range with Physics Animation - Fixed */
         .price-filter-container {
             padding: 15px 0;
         }
@@ -877,14 +1030,13 @@
 
         .range-slider {
             position: relative;
-            height: 40px;
+            height: 80px;
             margin: 20px 0;
         }
 
         .range-track {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 40px;
             width: 100%;
             height: 4px;
             background: var(--gray-2);
@@ -892,14 +1044,15 @@
         }
 
         .range-progress {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 4px;
-            background: var(--orange);
-            border-radius: 2px;
-            transition: all 0.2s var(--ease);
-        }
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          height: 4px;
+          background: var(--orange);
+          border-radius: 2px;
+          right: 0; /* تمت إضافة هذا السطر */
+          left: 0;  /* تمت إضافة هذا السطر */
+      }
 
         .range-input {
             position: absolute;
@@ -909,8 +1062,8 @@
             pointer-events: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 38px;
+            z-index: 3;
         }
 
         .range-input::-webkit-slider-thumb {
@@ -923,6 +1076,8 @@
             pointer-events: auto;
             box-shadow: 0 2px 8px rgba(255,122,0,0.4);
             transition: all 0.2s var(--ease);
+            position: relative;
+            z-index: 2;
         }
 
         .range-input::-moz-range-thumb {
@@ -935,14 +1090,77 @@
             box-shadow: 0 2px 8px rgba(255,122,0,0.4);
             transition: all 0.2s var(--ease);
             border: none;
+            position: relative;
+            z-index: 2;
         }
 
         .range-input::-webkit-slider-thumb:hover {
             transform: scale(1.2);
+            box-shadow: 0 4px 12px rgba(255,122,0,0.6);
         }
 
         .range-input::-moz-range-thumb:hover {
             transform: scale(1.2);
+            box-shadow: 0 4px 12px rgba(255,122,0,0.6);
+        }
+
+        /* Enhanced Price Tooltip with Physics - Fixed for RTL */
+      .price-tooltip {
+          position: absolute;
+          background: var(--black);
+          color: var(--white);
+          padding: 8px 14px;
+          border-radius: 8px;
+          font-size: 12px;
+          font-weight: 600;
+          white-space: nowrap;
+          pointer-events: none;
+          top: 5px;
+          transform: translateX(50%) translateY(0) scale(0.8); /* تم التعديل هنا */
+          transform-origin: bottom center;
+          opacity: 0;
+          z-index: 10;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+          transition: all 0.2s var(--ease-smooth);
+          will-change: transform;
+      }
+      
+      .price-tooltip.active {
+          opacity: 1;
+          transform: translateX(50%) translateY(-5px) scale(1); /* تم التعديل هنا */
+      }
+
+      .price-tooltip.moving {
+          transition: right 0.05s linear, transform 0.1s var(--ease-smooth); /* استخدم right بدلاً من left */
+      }
+
+      /* Physics tilt effect */
+      .price-tooltip.tilt-left {
+          transform: translateX(50%) translateY(-5px) scale(1.05) rotate(-8deg); /* تم التعديل هنا */
+      }
+      
+      .price-tooltip.tilt-left::after {
+          transform: translateX(-50%) rotate(15deg);
+      }
+
+      .price-tooltip.tilt-right {
+          transform: translateX(50%) translateY(-5px) scale(1.05) rotate(8deg); /* تم التعديل هنا */
+      }
+      
+      .price-tooltip.tilt-right::after {
+          transform: translateX(-50%) rotate(-15deg);
+      }
+
+        /* Bounce animation */
+      @keyframes tooltipBounce {
+          0% { transform: translateX(50%) translateY(-5px) scale(1); } /* تم التعديل هنا */
+          40% { transform: translateX(50%) translateY(-10px) scale(1.1); } /* تم التعديل هنا */
+          60% { transform: translateX(50%) translateY(-3px) scale(0.95); } /* تم التعديل هنا */
+          100% { transform: translateX(50%) translateY(-5px) scale(1); } /* تم التعديل هنا */
+      }
+
+        .price-tooltip.bounce {
+            animation: tooltipBounce 0.5s var(--ease-elastic);
         }
 
         .price-inputs {
@@ -1120,7 +1338,7 @@
             background: var(--orange);
         }
 
-        /* Categories */
+        /* Categories - Enhanced */
         .categories-section {
             padding: 0 20px 30px;
         }
@@ -1196,7 +1414,8 @@
         .category-icon-box {
             width: 75px;
             height: 75px;
-            background: linear-gradient(135deg, var(--gray-1) 0%, var(--gray-2) 100%);
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            backdrop-filter: blur(10px);
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
@@ -1205,6 +1424,10 @@
             transition: all 0.3s var(--ease-smooth);
             position: relative;
             overflow: hidden;
+        }
+
+        body.dark-mode .category-icon-box {
+            background: linear-gradient(135deg, rgba(36,36,36,0.9) 0%, rgba(36,36,36,0.7) 100%);
         }
 
         @media (min-width: 1024px) {
@@ -1216,8 +1439,8 @@
 
         .category-card:hover .category-icon-box {
             background: var(--gradient-orange);
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 24px rgba(255,122,0,0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(255,122,0,0.3);
         }
 
         .category-image {
@@ -1276,13 +1499,20 @@
         }
 
         .product-card {
-            background: var(--white);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px) saturate(180%);
             border-radius: var(--radius-md);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
             transition: all 0.3s var(--ease-smooth);
             cursor: pointer;
             position: relative;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        body.dark-mode .product-card {
+            background: rgba(36,36,36,0.95);
+            border-color: rgba(255,255,255,0.1);
         }
 
         .product-card:hover {
@@ -1326,10 +1556,19 @@
             box-shadow: 0 4px 12px rgba(255,122,0,0.3);
         }
 
-        .product-fav {
+        .product-actions {
             position: absolute;
             top: 10px;
             left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            opacity: 1;
+            transition: none;
+            z-index: 2;
+        }
+
+        .product-fav {
             width: 34px;
             height: 34px;
             background: rgba(255,255,255,0.95);
@@ -1340,10 +1579,13 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s var(--ease-smooth);
+            border: none;
         }
 
         .product-fav:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
+            background: var(--white);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .product-fav.active svg {
@@ -1408,6 +1650,8 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s var(--ease-smooth);
+            position: relative;
+            overflow: hidden;
         }
 
         .add-cart-btn:hover {
@@ -1415,25 +1659,32 @@
             transform: scale(1.1) rotate(5deg);
         }
 
-        /* Ultra Smooth Liquid Tab Navigation - Fixed */
-        .bottom-nav {
-            position: fixed;
-            bottom: 15px;
-            left: 15px;
-            right: 15px;
-            height: 70px;
-            background: rgba(255,255,255,0.98);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            z-index: 90;
-            overflow: visible;
+        .add-cart-btn.loading {
+            pointer-events: none;
         }
 
-        body.dark-mode .bottom-nav {
-            background: rgba(36,36,36,0.98);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        .add-cart-btn.loading svg {
+            animation: rotate 0.6s linear infinite;
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .add-cart-btn.success {
+            background: var(--success);
+        }
+
+        /* Enhanced Bottom Navigation - Fixed for all devices */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 65px;
+            z-index: 90;
+            transition: transform 0.3s var(--ease);
+            padding: 0 10px 10px;
         }
 
         @media (min-width: 1024px) {
@@ -1441,116 +1692,215 @@
                 display: none;
             }
         }
+        
+        /* Better mobile responsiveness */
+        @media (max-width: 480px) {
+            .bottom-nav {
+                height: 60px;
+                padding: 0 8px 8px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .bottom-nav {
+                height: 55px;
+                padding: 0 5px 5px;
+            }
+        }
 
+        /* Modern Nav Container - Enhanced */
         .nav-container {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
             position: relative;
-            padding: 0 10px;
-        }
-
-        /* Liquid Indicator - Fixed Position */
-        .nav-liquid-indicator {
-            position: absolute;
-            bottom: 0;
-            height: 70px;
-            width: 60px;
-            background: transparent;
-            transition: left 0.4s var(--ease-smooth);
-            pointer-events: none;
-        }
-
-        .nav-liquid-indicator::before {
-            content: '';
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 55px;
-            height: 55px;
-            background: var(--gradient-orange);
-            border-radius: 50%;
-            box-shadow: 0 10px 30px rgba(255,122,0,0.4);
-            transition: all 0.4s var(--ease-smooth);
-        }
-
-        .nav-liquid-indicator::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
             width: 100%;
-            height: 50%;
-            background: var(--orange);
-            opacity: 0.1;
-            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-            filter: blur(10px);
+            max-width: 450px;
+            height: 100%;
+            margin: 0 auto;
         }
 
-        /* Nav Items */
-        .nav-item {
-            flex: 1;
+        @media (max-width: 480px) {
+            .nav-container {
+                max-width: 100%;
+            }
+        }
+
+        .nav-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            /* Enhanced with subtle orange tint */
+            background: linear-gradient(135deg, 
+                rgba(255, 122, 0, 0.08) 0%, 
+                rgba(255, 255, 255, 0.95) 50%,
+                rgba(255, 122, 0, 0.05) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 122, 0, 0.15);
+            box-shadow: 0 -4px 20px rgba(255, 122, 0, 0.1), 
+                        0 8px 32px rgba(0, 0, 0, 0.1);
+            clip-path: url(#navClipPath);
+            border-radius: 20px 20px 0 0;
+        }
+
+        body.dark-mode .nav-background {
+            /* Enhanced dark mode with orange accent */
+            background: linear-gradient(135deg,
+                rgba(255, 122, 0, 0.12) 0%,
+                rgba(36, 36, 36, 0.95) 50%,
+                rgba(255, 122, 0, 0.08) 100%);
+            border-color: rgba(255, 122, 0, 0.2);
+            box-shadow: 0 -4px 20px rgba(255, 122, 0, 0.15),
+                        0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-circle {
+            position: absolute;
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-orange);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(255, 122, 0, 0.5),
+                        0 8px 32px rgba(255, 122, 0, 0.3);
+            border-radius: 50%;
+            bottom: 28px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            cursor: pointer;
-            position: relative;
-            z-index: 1;
-            padding: 10px 0;
-            transition: all 0.3s var(--ease-smooth);
+            z-index: 10;
+            transition: left var(--nav-animation-duration) var(--nav-smooth-ease),
+                        transform 0.2s var(--ease);
         }
 
-        .nav-item.active {
-            transform: translateY(-25px);
+        @media (max-width: 480px) {
+            .floating-circle {
+                width: 50px;
+                height: 50px;
+                bottom: 25px;
+            }
         }
 
-        .nav-icon-wrapper {
-            position: relative;
-            width: 24px;
-            height: 24px;
-            transition: all 0.3s var(--ease-smooth);
+        @media (max-width: 360px) {
+            .floating-circle {
+                width: 45px;
+                height: 45px;
+                bottom: 22px;
+            }
         }
 
-        .nav-item.active .nav-icon-wrapper {
-            transform: scale(1.2);
+        .floating-circle svg,
+        .floating-circle i {
+            font-size: 22px;
+            color: var(--white);
+            transition: opacity 200ms ease, transform 200ms ease;
         }
 
-        .nav-icon {
-            width: 100%;
+        @media (max-width: 480px) {
+            .floating-circle svg,
+            .floating-circle i {
+                font-size: 20px;
+            }
+        }
+
+        .floating-circle.switching svg,
+        .floating-circle.switching i {
+            opacity: 0;
+            transform: scale(0.8) rotate(90deg);
+        }
+
+        .nav-items-container {
+            position: absolute;
+            width: calc(100% - 40px);
+            max-width: 380px;
             height: 100%;
-            stroke: var(--gray-3);
-            transition: all 0.3s var(--ease-smooth);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 20px;
         }
 
-        body.dark-mode .nav-icon {
-            stroke: var(--gray-4);
+        @media (max-width: 480px) {
+            .nav-items-container {
+                width: calc(100% - 30px);
+                padding: 0 15px;
+            }
         }
 
-        .nav-item.active .nav-icon {
-            stroke: var(--white);
-            fill: none;
+        .nav-item {
+            cursor: pointer;
+            z-index: 6;
+            position: relative;
+            padding: 10px;
         }
 
-        .nav-label {
-            font-size: 11px;
-            font-weight: 600;
+        .nav-item svg,
+        .nav-item i {
+            font-size: 22px;
             color: var(--gray-3);
-            transition: all 0.3s var(--ease-smooth);
-            opacity: 1;
+            transition: all 0.3s var(--ease);
+            display: block;
         }
 
-        body.dark-mode .nav-label {
+        @media (max-width: 480px) {
+            .nav-item svg,
+            .nav-item i {
+                font-size: 20px;
+            }
+        }
+
+        body.dark-mode .nav-item svg,
+        body.dark-mode .nav-item i {
             color: var(--gray-4);
         }
 
-        .nav-item.active .nav-label {
+        .nav-item:not(.active):hover svg,
+        .nav-item:not(.active):hover i {
+            color: var(--orange);
+            transform: translateY(-2px) scale(1.1);
+        }
+
+        /* Fixed: Hide active icon properly */
+        .nav-item.active {
             opacity: 0;
-            transform: translateY(10px);
+            pointer-events: none;
+        }
+
+        .nav-item.active svg,
+        .nav-item.active i {
+            display: none;
+        }
+
+        .nav-item .nav-counter {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            min-width: 18px;
+            height: 18px;
+            background: var(--orange);
+            color: var(--white);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 0 5px;
+            border: 2px solid var(--white);
+            box-shadow: 0 2px 8px rgba(255, 122, 0, 0.4);
+        }
+
+        body.dark-mode .nav-item .nav-counter {
+            border-color: var(--dark-card);
+        }
+
+        #navPath {
+            transition: d var(--nav-animation-duration) var(--nav-smooth-ease);
+        }
+
+        .clip-svg {
+            position: absolute;
+            width: 0;
+            height: 0;
         }
 
         /* Desktop Navigation */
@@ -1642,11 +1992,16 @@
         }
 
         .settings-section {
-            background: var(--white);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
             border-radius: var(--radius-md);
             padding: 20px;
             margin-bottom: 20px;
             box-shadow: var(--shadow-sm);
+        }
+
+        body.dark-mode .settings-section {
+            background: rgba(36,36,36,0.95);
         }
 
         .settings-title {
@@ -1661,7 +2016,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 15px 0;
-            border-bottom: 1px solid var(--gray-1);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
         body.dark-mode .setting-item {
@@ -1681,7 +2036,8 @@
         .setting-icon {
             width: 40px;
             height: 40px;
-            background: var(--gray-1);
+            background: rgba(0,0,0,0.03);
+            backdrop-filter: blur(10px);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -1689,7 +2045,7 @@
         }
 
         body.dark-mode .setting-icon {
-            background: var(--black);
+            background: rgba(255,255,255,0.05);
         }
 
         .setting-text {
@@ -1729,7 +2085,7 @@
             left: 24px;
         }
 
-        /* Cart Page */
+        /* Enhanced Cart Page with Better Animation */
         .cart-page {
             padding: 20px;
             min-height: calc(100vh - 170px);
@@ -1748,51 +2104,100 @@
             padding: 60px 20px;
         }
 
-        /* Animated Empty Cart Icon */
+        /* Enhanced Cart Animation - Improved */
         .empty-icon {
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             margin: 0 auto 20px;
             position: relative;
         }
 
-        .empty-icon svg {
+        .empty-cart-animation {
             width: 100%;
             height: 100%;
+            transform-origin: center;
         }
 
-        .empty-icon .cart-body {
-            animation: cartBounce 3s infinite ease-in-out;
+        .cart-body {
+            fill: none;
+            stroke: url(#cartGradient);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 300;
+            animation: drawCart 4s var(--ease-smooth) infinite;
         }
 
-        .empty-icon .cart-wheel-1 {
-            animation: wheelRoll 2s infinite linear;
-            transform-origin: 35px 85px;
+        @keyframes drawCart {
+            0% {
+                stroke-dashoffset: 300;
+                opacity: 0.3;
+            }
+            25% {
+                stroke-dashoffset: 150;
+                opacity: 0.6;
+            }
+            50% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+            75% {
+                stroke-dashoffset: -150;
+                opacity: 0.6;
+            }
+            100% {
+                stroke-dashoffset: -300;
+                opacity: 0.3;
+            }
         }
 
-        .empty-icon .cart-wheel-2 {
-            animation: wheelRoll 2s infinite linear;
-            transform-origin: 65px 85px;
+        .cart-wheel {
+    fill: var(--orange);
+    transform-origin: center;
+}
+
+
+        .cart-handle {
+            stroke: var(--orange-dark);
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            animation: handleSwing 3s var(--ease-elastic) infinite;
+            transform-origin: 25px 30px;
         }
 
-        .empty-icon .cart-handle {
-            animation: handleWave 3s infinite ease-in-out;
-            transform-origin: 20px 20px;
+        @keyframes handleSwing {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(-10deg);
+            }
+            75% {
+                transform: rotate(10deg);
+            }
         }
 
-        @keyframes cartBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        /* Add sparkle effects */
+        .cart-sparkle {
+            fill: var(--orange);
+            opacity: 0;
+            animation: sparkle 4s var(--ease) infinite;
         }
 
-        @keyframes wheelRoll {
-            to { transform: rotate(360deg); }
-        }
+        .cart-sparkle:nth-child(2) { animation-delay: 0.5s; }
+        .cart-sparkle:nth-child(3) { animation-delay: 1s; }
+        .cart-sparkle:nth-child(4) { animation-delay: 1.5s; }
 
-        @keyframes handleWave {
-            0%, 100% { transform: rotate(0); }
-            25% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1) rotate(180deg);
+            }
         }
 
         .empty-title {
@@ -1818,13 +2223,18 @@
         }
 
         .cart-item {
-            background: var(--white);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
             border-radius: var(--radius-md);
             padding: 15px;
             margin-bottom: 15px;
             display: flex;
             gap: 15px;
             box-shadow: var(--shadow-sm);
+        }
+
+        body.dark-mode .cart-item {
+            background: rgba(36,36,36,0.95);
         }
 
         .cart-item-image {
@@ -1864,7 +2274,8 @@
             width: 30px;
             height: 30px;
             border: none;
-            background: var(--gray-1);
+            background: rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s var(--ease-smooth);
@@ -1873,6 +2284,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        body.dark-mode .qty-btn {
+            background: rgba(255,255,255,0.05);
+            color: var(--white);
         }
 
         .qty-btn:hover {
@@ -1939,6 +2355,10 @@
             position: relative;
             overflow: hidden;
             font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .checkout-btn::before {
@@ -1964,7 +2384,42 @@
             box-shadow: 0 15px 40px rgba(255,122,0,0.4);
         }
 
-        /* Favorites Page */
+        .checkout-btn.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .checkout-btn.success {
+            background: var(--success);
+        }
+
+        .checkout-btn .btn-text {
+            transition: all 0.3s var(--ease);
+        }
+
+        .checkout-btn .btn-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--white);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            display: none;
+        }
+
+        .checkout-btn.loading .btn-spinner {
+            display: block;
+        }
+
+        .checkout-btn.loading .btn-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Enhanced Favorites Page Animation - Improved */
         .favorites-page {
             padding: 20px;
         }
@@ -1975,58 +2430,108 @@
             }
         }
 
-        /* Animated Empty Favorites Icon */
         .favorites-empty-icon {
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             margin: 0 auto 20px;
             position: relative;
         }
 
-        .favorites-empty-icon svg {
+        .favorites-animation {
             width: 100%;
             height: 100%;
-        }
-
-        .favorites-empty-icon .heart-outline {
-            animation: heartPulse 2s infinite ease-in-out;
             transform-origin: center;
         }
 
-        .favorites-empty-icon .heart-particle {
-            animation: particleFloat 3s infinite ease-in-out;
-        }
-
-        .favorites-empty-icon .heart-particle:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
-        .favorites-empty-icon .heart-particle:nth-child(3) {
-            animation-delay: 1s;
+        .heart-main {
+            fill: url(#heartGradient);
+            stroke: var(--orange);
+            stroke-width: 2;
+            animation: heartPulse 3s var(--ease-elastic) infinite;
+            transform-origin: center;
+            filter: drop-shadow(0 4px 12px rgba(255, 122, 0, 0.3));
         }
 
         @keyframes heartPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            0%, 100% {
+                transform: scale(1);
+                stroke-width: 2;
+            }
+            15% {
+                transform: scale(1.15);
+                stroke-width: 3;
+            }
+            30% {
+                transform: scale(1.05);
+                stroke-width: 2;
+            }
+            45% {
+                transform: scale(1.12);
+                stroke-width: 2.5;
+            }
+            60% {
+                transform: scale(1);
+                stroke-width: 2;
+            }
         }
 
-        @keyframes particleFloat {
-            0%, 100% { 
-                transform: translateY(0) translateX(0);
+        .heart-particle {
+            fill: var(--orange);
+            opacity: 0;
+            animation: floatParticle 3s var(--ease-smooth) infinite;
+            transform-origin: center;
+        }
+
+        .heart-particle:nth-child(2) { animation-delay: 0.3s; }
+        .heart-particle:nth-child(3) { animation-delay: 0.6s; }
+        .heart-particle:nth-child(4) { animation-delay: 0.9s; }
+        .heart-particle:nth-child(5) { animation-delay: 1.2s; }
+        .heart-particle:nth-child(6) { animation-delay: 1.5s; }
+        .heart-particle:nth-child(7) { animation-delay: 1.8s; }
+        .heart-particle:nth-child(8) { animation-delay: 2.1s; }
+
+        @keyframes floatParticle {
+            0% {
                 opacity: 0;
+                transform: translate(0, 0) scale(0) rotate(0deg);
             }
             20% {
                 opacity: 1;
+                transform: translate(-20px, -20px) scale(1.2) rotate(180deg);
+            }
+            40% {
+                opacity: 0.8;
+                transform: translate(15px, -35px) scale(0.9) rotate(360deg);
+            }
+            60% {
+                opacity: 0.6;
+                transform: translate(-10px, -50px) scale(0.7) rotate(540deg);
             }
             80% {
-                opacity: 1;
+                opacity: 0.3;
+                transform: translate(25px, -65px) scale(0.5) rotate(720deg);
             }
             100% {
-                transform: translateY(-30px) translateX(10px);
+                opacity: 0;
+                transform: translate(0, -80px) scale(0.2) rotate(900deg);
             }
         }
 
-        /* Account Page */
+        /* Heart shine effect */
+        .heart-shine {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.6);
+            stroke-width: 1;
+            opacity: 0;
+            animation: heartShine 3s var(--ease) infinite;
+        }
+
+        @keyframes heartShine {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Enhanced Account Page */
         .account-page {
             padding: 20px;
         }
@@ -2094,10 +2599,15 @@
         }
 
         .menu-list {
-            background: var(--white);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
             border-radius: var(--radius-md);
             padding: 10px;
             box-shadow: var(--shadow-sm);
+        }
+
+        body.dark-mode .menu-list {
+            background: rgba(36,36,36,0.95);
         }
 
         .menu-item {
@@ -2110,18 +2620,19 @@
         }
 
         .menu-item:hover {
-            background: var(--gray-1);
+            background: rgba(0,0,0,0.02);
             transform: translateX(-5px);
         }
 
         body.dark-mode .menu-item:hover {
-            background: var(--black);
+            background: rgba(255,255,255,0.02);
         }
 
         .menu-icon {
             width: 40px;
             height: 40px;
-            background: var(--gray-1);
+            background: rgba(0,0,0,0.03);
+            backdrop-filter: blur(10px);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -2131,7 +2642,7 @@
         }
 
         body.dark-mode .menu-icon {
-            background: var(--black);
+            background: rgba(255,255,255,0.05);
         }
 
         .menu-item:hover .menu-icon {
@@ -2171,12 +2682,19 @@
 
         .modal-content {
             position: relative;
-            background: var(--white);
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(30px) saturate(180%);
             border-radius: var(--radius-lg);
             transform: scale(0.9);
             transition: transform 0.4s var(--ease-smooth);
             max-width: 500px;
             margin: 0 auto;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        body.dark-mode .modal-content {
+            background: rgba(36,36,36,0.98);
+            border-color: rgba(255,255,255,0.1);
         }
 
         @media (min-width: 1024px) {
@@ -2229,12 +2747,21 @@
             position: relative;
         }
 
+        @media (min-width: 1024px) {
+            .modal-image-section {
+                position: sticky;
+                top: 20px;
+                height: fit-content;
+            }
+        }
+
         .modal-image {
             width: 100%;
             aspect-ratio: 1;
             background: var(--gray-1);
             border-radius: var(--radius-lg) var(--radius-lg) 0 0;
             object-fit: cover;
+            transition: all 0.3s var(--ease);
         }
 
         @media (min-width: 1024px) {
@@ -2283,6 +2810,8 @@
         @media (min-width: 1024px) {
             .modal-info-section {
                 padding: 0;
+                max-height: 80vh;
+                overflow-y: auto;
             }
         }
 
@@ -2354,7 +2883,55 @@
             font-weight: 700;
         }
 
-        /* Product Features */
+        .color-options {
+            margin-bottom: 20px;
+        }
+
+        .color-options-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--black);
+        }
+
+        body.dark-mode .color-options-title {
+            color: var(--white);
+        }
+
+        .color-swatches {
+            display: flex;
+            gap: 10px;
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s var(--ease);
+            border: 3px solid transparent;
+            position: relative;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .color-swatch.active {
+            border-color: var(--orange);
+        }
+
+        .color-swatch.active::after {
+            content: '✓';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+        }
+
         .modal-features {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -2363,11 +2940,16 @@
         }
 
         .feature-box {
-            background: var(--gray-1);
+            background: rgba(0,0,0,0.03);
+            backdrop-filter: blur(10px);
             border-radius: var(--radius-sm);
             padding: 12px;
             text-align: center;
             transition: all 0.2s var(--ease);
+        }
+
+        body.dark-mode .feature-box {
+            background: rgba(255,255,255,0.05);
         }
 
         .feature-box:hover {
@@ -2396,7 +2978,6 @@
             color: var(--white);
         }
 
-        /* Specifications */
         .modal-section {
             margin-bottom: 25px;
         }
@@ -2418,8 +2999,13 @@
             align-items: center;
             gap: 15px;
             padding: 12px;
-            background: var(--gray-1);
+            background: rgba(0,0,0,0.03);
+            backdrop-filter: blur(10px);
             border-radius: var(--radius-sm);
+        }
+
+        body.dark-mode .spec-item {
+            background: rgba(255,255,255,0.05);
         }
 
         .spec-label {
@@ -2434,7 +3020,6 @@
             font-size: 14px;
         }
 
-        /* Modal Actions */
         .modal-actions {
             display: flex;
             gap: 15px;
@@ -2557,22 +3142,13 @@
     </style>
 </head>
 <body>
-    <!-- Premium Creative Loader -->
     <div id="loader">
-        <div class="loader-creative">
-            <div class="sand-container" id="sandContainer"></div>
-            <div class="laptop-icon">
-                <svg viewBox="0 0 100 100">
-                    <rect x="20" y="25" width="60" height="40" rx="3"/>
-                    <rect x="25" y="30" width="50" height="30" rx="2"/>
-                    <rect x="15" y="65" width="70" height="5" rx="2"/>
-                    <rect x="40" y="67" width="20" height="1"/>
-                </svg>
+        <div class="loader-content">
+           <img src="logo.svg" alt="شعار العدسة الكونية" class="loader-logo">
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
             </div>
-        </div>
-        <div class="loader-brand">
-            <div class="loader-brand-text">العدسة الكونية</div>
-            <div class="loader-brand-sub">تقنية بلا حدود</div>
+            <div class="loader-subtitle" style="margin-top: 20px; letter-spacing: 2px;">جاري التحميل...</div>
         </div>
     </div>
 
@@ -2580,10 +3156,7 @@
     <header class="header">
         <div class="logo-wrapper">
             <div class="logo">
-                <svg viewBox="0 0 24 24" fill="white">
-                    <circle cx="12" cy="12" r="10" fill="none" stroke="white" stroke-width="2"/>
-                    <circle cx="12" cy="12" r="3" fill="white"/>
-                </svg>
+                <img src="https://www2.0zz0.com/2025/09/01/19/508183112.png" alt="العدسة الكونية">
             </div>
             <span class="brand-name">العدسة الكونية</span>
         </div>
@@ -2591,8 +3164,14 @@
         <!-- Desktop Navigation -->
         <nav class="desktop-nav">
             <a href="#" class="desktop-nav-item active" onclick="switchTab(0, 'home-section'); return false;">الرئيسية</a>
-            <a href="#" class="desktop-nav-item" onclick="switchTab(1, 'cart-section'); return false;">السلة</a>
-            <a href="#" class="desktop-nav-item" onclick="switchTab(2, 'favorites-section'); return false;">المفضلة</a>
+            <a href="#" class="desktop-nav-item" onclick="switchTab(1, 'cart-section'); return false;">
+                السلة
+                <span class="nav-counter" id="desktopCartCounter" style="display:none;">0</span>
+            </a>
+            <a href="#" class="desktop-nav-item" onclick="switchTab(2, 'favorites-section'); return false;">
+                المفضلة
+                <span class="nav-counter" id="desktopFavCounter" style="display:none;">0</span>
+            </a>
             <a href="#" class="desktop-nav-item" onclick="switchTab(3, 'settings-section'); return false;">الإعدادات</a>
             <a href="#" class="desktop-nav-item" onclick="switchTab(4, 'account-section'); return false;">حسابي</a>
         </nav>
@@ -2659,17 +3238,6 @@
                     <div class="notification-time">منذ ساعة</div>
                 </span>
             </div>
-            <div class="notification-item" onclick="showToast('تم فتح الإشعار')">
-                <span class="notification-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
-                    </svg>
-                </span>
-                <span class="notification-content">
-                    <div class="notification-text">تم تأكيد طلبك بنجاح</div>
-                    <div class="notification-time">منذ يومين</div>
-                </span>
-            </div>
         </div>
     </div>
 
@@ -2677,7 +3245,14 @@
     <div class="search-overlay" id="searchOverlay">
         <div class="search-container">
             <div class="search-header">
-                <input type="text" class="search-input" placeholder="ابحث عن المنتجات..." id="searchInput" onkeyup="performSearch()">
+                <div class="search-input-wrapper">
+                    <input type="text" class="search-input" placeholder="ابحث عن المنتجات..." id="searchInput" onkeyup="performLiveSearch()">
+                    <button class="voice-search-btn" id="voiceSearchBtn" onclick="startVoiceSearch()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                            <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
+                        </svg>
+                    </button>
+                </div>
                 <button class="search-close" onclick="toggleSearch()">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="18" y1="6" x2="6" y2="18"/>
@@ -2685,8 +3260,26 @@
                     </svg>
                 </button>
             </div>
+            
+            <!-- Search History -->
+            <div class="search-history" id="searchHistory" style="display:none;">
+                <div class="search-history-title">
+                    آخر ما بحثت عنه
+                    <span class="search-history-clear" onclick="clearSearchHistory()">مسح</span>
+                </div>
+                <div class="suggestion-tags" id="historyTags"></div>
+            </div>
+            
+            <!-- Search Categories -->
+            <div class="search-categories" id="searchCategories" style="display:none;">
+                <span class="search-category active" onclick="filterSearchCategory(this, 'all')">الكل</span>
+                <span class="search-category" onclick="filterSearchCategory(this, 'products')">منتجات</span>
+                <span class="search-category" onclick="filterSearchCategory(this, 'categories')">فئات</span>
+                <span class="search-category" onclick="filterSearchCategory(this, 'brands')">علامات تجارية</span>
+            </div>
+            
             <div class="search-suggestions">
-                <div class="search-suggestion-title">بحث سريع</div>
+                <div class="search-suggestion-title">الأكثر بحثاً</div>
                 <div class="suggestion-tags">
                     <span class="suggestion-tag" onclick="quickSearch('MacBook')">MacBook</span>
                     <span class="suggestion-tag" onclick="quickSearch('شاشات')">شاشات</span>
@@ -2707,7 +3300,7 @@
                 <div class="carousel">
                     <div class="carousel-track" id="carouselTrack">
                         <div class="carousel-slide">
-                            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800" alt="MacBook" class="slide-image">
+                            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800" alt="MacBook" class="slide-image" loading="lazy">
                             <div class="slide-content">
                                 <span class="slide-badge">عرض خاص</span>
                                 <h2 class="slide-title">MacBook Pro M3</h2>
@@ -2716,7 +3309,7 @@
                             </div>
                         </div>
                         <div class="carousel-slide">
-                            <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=800" alt="Gaming Monitor" class="slide-image">
+                            <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=800" alt="Gaming Monitor" class="slide-image" loading="lazy">
                             <div class="slide-content">
                                 <span class="slide-badge">جديد</span>
                                 <h2 class="slide-title">شاشات Gaming 4K</h2>
@@ -2725,7 +3318,7 @@
                             </div>
                         </div>
                         <div class="carousel-slide">
-                            <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800" alt="Accessories" class="slide-image">
+                            <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800" alt="Accessories" class="slide-image" loading="lazy">
                             <div class="slide-content">
                                 <span class="slide-badge">خصم 30%</span>
                                 <h2 class="slide-title">ملحقات احترافية</h2>
@@ -2740,6 +3333,17 @@
                         <span class="carousel-dot" onclick="goToSlide(2)"></span>
                     </div>
                 </div>
+            </div>
+
+            <!-- Personalized Suggestions -->
+            <div class="suggestions-section" id="suggestionsSection" style="display:none;">
+                <div class="suggestions-header">
+                    <div>
+                        <h2 class="suggestions-title">نقترحها لك</h2>
+                        <p class="suggestions-subtitle">بناءً على ما تصفحته مؤخراً</p>
+                    </div>
+                </div>
+                <div class="suggestions-grid" id="suggestionsGrid"></div>
             </div>
 
             <!-- Enhanced Filter Section -->
@@ -2762,6 +3366,8 @@
                     <span class="filter-chip" onclick="filterByBrand(event, 'Sony')">Sony</span>
                     <span class="filter-chip" onclick="filterByBrand(event, 'Microsoft')">Microsoft</span>
                     <span class="filter-chip" onclick="filterByBrand(event, 'LG')">LG</span>
+                    <span class="filter-chip" onclick="filterByBrand(event, 'Samsung')">Samsung</span>
+                    <span class="filter-chip" onclick="filterByBrand(event, 'Lenovo')">Lenovo</span>
                 </div>
                 
                 <div class="price-filter-container">
@@ -2774,6 +3380,8 @@
                         <div class="range-track">
                             <div class="range-progress" id="rangeProgress" style="left: 2.5%; right: 25%;"></div>
                         </div>
+                        <div class="price-tooltip" id="minTooltip">500,000</div>
+                        <div class="price-tooltip" id="maxTooltip">15,000,000</div>
                         <input type="range" class="range-input" min="0" max="20000000" value="500000" step="100000" id="rangeMin" oninput="updatePriceRange()">
                         <input type="range" class="range-input" min="0" max="20000000" value="15000000" step="100000" id="rangeMax" oninput="updatePriceRange()">
                     </div>
@@ -2791,7 +3399,7 @@
                 </div>
             </div>
 
-            <!-- Categories -->
+            <!-- Categories - Enhanced -->
             <div class="categories-section">
                 <div class="section-header">
                     <h2 class="section-title">الفئات</h2>
@@ -2805,33 +3413,51 @@
                 <div class="categories-grid">
                     <div class="category-card" onclick="filterByCategory('لابتوبات')">
                         <div class="category-icon-box">
-                            <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=150" alt="لابتوبات" class="category-image">
+                            <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=150" alt="لابتوبات" class="category-image" loading="lazy">
                         </div>
                         <div class="category-label">لابتوبات</div>
                     </div>
                     <div class="category-card" onclick="filterByCategory('شاشات')">
                         <div class="category-icon-box">
-                            <img src="https://images.unsplash.com/photo-1565695340051-6ae3603dfa4d?w=150" alt="شاشات" class="category-image">
+                            <img src="https://images.unsplash.com/photo-1565695340051-6ae3603dfa4d?w=150" alt="شاشات" class="category-image" loading="lazy">
                         </div>
                         <div class="category-label">شاشات</div>
                     </div>
                     <div class="category-card" onclick="filterByCategory('سماعات')">
                         <div class="category-icon-box">
-                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150" alt="سماعات" class="category-image">
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150" alt="سماعات" class="category-image" loading="lazy">
                         </div>
                         <div class="category-label">سماعات</div>
                     </div>
                     <div class="category-card" onclick="filterByCategory('ماوس')">
                         <div class="category-icon-box">
-                            <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=150" alt="ماوس" class="category-image">
+                            <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=150" alt="ماوس" class="category-image" loading="lazy">
                         </div>
                         <div class="category-label">ماوس</div>
                     </div>
                     <div class="category-card" onclick="filterByCategory('كيبورد')">
                         <div class="category-icon-box">
-                            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=150" alt="كيبورد" class="category-image">
+                            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=150" alt="كيبورد" class="category-image" loading="lazy">
                         </div>
                         <div class="category-label">كيبورد</div>
+                    </div>
+                    <div class="category-card" onclick="filterByCategory('أجهزة لوحية')">
+                        <div class="category-icon-box">
+                            <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=150" alt="أجهزة لوحية" class="category-image" loading="lazy">
+                        </div>
+                        <div class="category-label">أجهزة لوحية</div>
+                    </div>
+                    <div class="category-card" onclick="filterByCategory('ملحقات')">
+                        <div class="category-icon-box">
+                            <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=150" alt="ملحقات" class="category-image" loading="lazy">
+                        </div>
+                        <div class="category-label">ملحقات</div>
+                    </div>
+                    <div class="category-card" onclick="filterByCategory('كاميرات')">
+                        <div class="category-icon-box">
+                            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=150" alt="كاميرات" class="category-image" loading="lazy">
+                        </div>
+                        <div class="category-label">كاميرات</div>
                     </div>
                 </div>
             </div>
@@ -2905,36 +3531,11 @@
                         </div>
                         <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                     </div>
-                    <div class="setting-item">
-                        <div class="setting-label">
-                            <div class="setting-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="#FF7A00">
-                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-                                </svg>
-                            </div>
-                            <span class="setting-text">الموقع</span>
-                        </div>
-                        <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
-                    </div>
-                </div>
-
-                <div class="settings-section">
-                    <h3 class="settings-title">حول التطبيق</h3>
-                    <div class="setting-item">
-                        <div class="setting-label">
-                            <div class="setting-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="#FF7A00">
-                                    <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
-                                </svg>
-                            </div>
-                            <span class="setting-text">الإصدار 2.0.1</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Account Section -->
+                <!-- Enhanced Account Section -->
         <section id="account-section" class="section">
             <div class="account-page">
                 <div class="profile-header">
@@ -2955,7 +3556,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="menu-item" onclick="showToast('إدارة العناوين')">
+                    <div class="menu-item" onclick="showToast('عناويني المحفوظة')">
                         <div class="menu-text">العناوين</div>
                         <div class="menu-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="#FF7A00">
@@ -2963,20 +3564,51 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="menu-item" onclick="showToast('مركز المساعدة')">
-                        <div class="menu-text">المساعدة</div>
+                    <div class="menu-item" onclick="showToast('وسائل الدفع المحفوظة')">
+                        <div class="menu-text">وسائل الدفع</div>
                         <div class="menu-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="#FF7A00">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+                                <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
                             </svg>
                         </div>
                     </div>
-                    <div class="menu-item" onclick="showToast('صفحة تسجيل الدخول')">
-                        <div class="menu-text">تسجيل الدخول</div>
+                    <div class="menu-item" onclick="showToast('تراخيص المستخدم')">
+                        <div class="menu-text">التراخيص</div>
                         <div class="menu-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="#FF7A00">
-                                <path d="M10 17l5-5-5-5v10z"/>
-                                <path d="M19 3h-8c-1.11 0-2 .89-2 2v4h2V5h8v14h-8v-4H9v4c0 1.11.89 2 2 2h8c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2z"/>
+                                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="showToast('نقاط الولاء')">
+                        <div class="menu-text">نقاط الولاء</div>
+                        <div class="menu-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#FF7A00">
+                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="showToast('قائمة المقارنة')">
+                        <div class="menu-text">المقارنات</div>
+                        <div class="menu-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#FF7A00">
+                                <path d="M10 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h5v2h2V1h-2v2zm0 15H5l5-6v6zm9-15h-5v2h5v13l-5-6v9h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="showToast('سجل المشاهدات')">
+                        <div class="menu-text">سجل المشاهدة</div>
+                        <div class="menu-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#FF7A00">
+                                <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="showToast('تسجيل الخروج')">
+                        <div class="menu-text">تسجيل الخروج</div>
+                        <div class="menu-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#FF7A00">
+                                <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
                             </svg>
                         </div>
                     </div>
@@ -2985,62 +3617,56 @@
         </section>
     </div>
 
-    <!-- Ultra Smooth Liquid Bottom Navigation - Fixed -->
+    <!-- Enhanced Bottom Navigation - Fixed -->
     <nav class="bottom-nav">
-        <div class="nav-liquid-indicator" id="navIndicator"></div>
-        
         <div class="nav-container">
-            <div class="nav-item active" onclick="switchTab(0, 'home-section')">
-                <div class="nav-icon-wrapper">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                        <polyline points="9 22 9 12 15 12 15 22"/>
-                    </svg>
-                </div>
-                <span class="nav-label">الرئيسية</span>
-            </div>
+            <div class="nav-background"></div>
+            <div class="floating-circle" id="floatingCircle"></div>
             
-            <div class="nav-item" onclick="switchTab(1, 'cart-section')">
-                <div class="nav-icon-wrapper">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <circle cx="9" cy="21" r="1"/>
-                        <circle cx="20" cy="21" r="1"/>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-                    </svg>
+            <div class="nav-items-container">
+                <div class="nav-item active" data-icon-class="fa-home" onclick="switchTab(0, 'home-section')">
+                    <i class="fas fa-home"></i>
                 </div>
-                <span class="nav-label">سلة التسوق</span>
-            </div>
-            
-            <div class="nav-item" onclick="switchTab(2, 'favorites-section')">
-                <div class="nav-icon-wrapper">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
+                <div class="nav-item" data-icon-class="fa-shopping-cart" onclick="switchTab(1, 'cart-section')">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="nav-counter" id="cartCounter" style="display:none;">0</span>
                 </div>
-                <span class="nav-label">قائمة المفضلة</span>
-            </div>
-            
-            <div class="nav-item" onclick="switchTab(3, 'settings-section')">
-                <div class="nav-icon-wrapper">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/>
-                    </svg>
+                <div class="nav-item" data-icon-class="fa-heart" onclick="switchTab(2, 'favorites-section')">
+                    <i class="fas fa-heart"></i>
+                    <span class="nav-counter" id="favCounter" style="display:none;">0</span>
                 </div>
-                <span class="nav-label">الإعدادات</span>
-            </div>
-            
-            <div class="nav-item" onclick="switchTab(4, 'account-section')">
-                <div class="nav-icon-wrapper">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
+                <div class="nav-item" data-icon-class="fa-cog" onclick="switchTab(3, 'settings-section')">
+                    <i class="fas fa-cog"></i>
                 </div>
-                <span class="nav-label">حسابي</span>
+                <div class="nav-item" data-icon-class="fa-user" onclick="switchTab(4, 'account-section')">
+                    <i class="fas fa-user"></i>
+                </div>
             </div>
         </div>
     </nav>
+
+    <!-- SVG Definitions for animations -->
+    <svg style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <!-- Cart Gradient -->
+            <linearGradient id="cartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#FF7A00;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#FFA64D;stop-opacity:1" />
+            </linearGradient>
+            
+            <!-- Heart Gradient -->
+            <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#FF7A00;stop-opacity:0.3" />
+                <stop offset="50%" style="stop-color:#FF7A00;stop-opacity:0.5" />
+                <stop offset="100%" style="stop-color:#FFA64D;stop-opacity:0.3" />
+            </linearGradient>
+            
+            <!-- Nav Clip Path -->
+            <clipPath id="navClipPath">
+                <path id="navPath" d=""></path>
+            </clipPath>
+        </defs>
+    </svg>
 
     <!-- Enhanced Product Modal -->
     <div class="modal" id="productModal">
@@ -3059,9 +3685,10 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
-        // State Management
+        // Enhanced State Management with More Products
         const state = {
             products: [
+                // Laptops
                 {
                     id: 1,
                     name: 'MacBook Pro M3 Pro',
@@ -3078,7 +3705,8 @@
                     ram: '18GB',
                     storage: '1TB SSD',
                     display: '16" Retina',
-                    warranty: '3 سنوات'
+                    warranty: '3 سنوات',
+                    colors: ['#C0C0C0', '#1C1C1C', '#F5F5DC']
                 },
                 {
                     id: 2,
@@ -3096,7 +3724,8 @@
                     ram: '32GB DDR5',
                     storage: '2TB NVMe',
                     display: '15.6" 4K OLED',
-                    warranty: 'سنتان'
+                    warranty: 'سنتان',
+                    colors: ['#C0C0C0', '#1C1C1C']
                 },
                 {
                     id: 3,
@@ -3112,7 +3741,8 @@
                     resolution: '4K UHD',
                     refreshRate: '144Hz',
                     responseTime: '1ms',
-                    warranty: 'سنة واحدة'
+                    warranty: 'سنة واحدة',
+                    colors: ['#1C1C1C']
                 },
                 {
                     id: 4,
@@ -3130,7 +3760,8 @@
                     storage: '512GB',
                     display: '12.9" Liquid Retina XDR',
                     connectivity: 'WiFi 6E + 5G',
-                    warranty: 'سنة واحدة'
+                    warranty: 'سنة واحدة',
+                    colors: ['#C0C0C0', '#1C1C1C']
                 },
                 {
                     id: 5,
@@ -3146,7 +3777,8 @@
                     ram: '16GB LPDDR5',
                     storage: '512GB SSD',
                     display: '13.5" PixelSense',
-                    warranty: 'سنتان'
+                    warranty: 'سنتان',
+                    colors: ['#708090', '#FFD700', '#1C1C1C', '#4169E1']
                 },
                 {
                     id: 6,
@@ -3162,7 +3794,8 @@
                     resolution: '2560x1440',
                     refreshRate: '240Hz',
                     responseTime: '0.5ms',
-                    warranty: 'سنتان'
+                    warranty: 'سنتان',
+                    colors: ['#1C1C1C', '#FF0000']
                 },
                 {
                     id: 7,
@@ -3179,7 +3812,8 @@
                     ram: '16GB DDR4',
                     storage: '1TB PCIe SSD',
                     display: '13.5" OLED Touch',
-                    warranty: '3 سنوات'
+                    warranty: '3 سنوات',
+                    colors: ['#1C1C1C', '#000080', '#C0C0C0']
                 },
                 {
                     id: 8,
@@ -3195,69 +3829,533 @@
                     connectivity: 'Bluetooth 5.2',
                     battery: '30 ساعة',
                     features: 'Active Noise Cancellation',
-                    warranty: 'سنة واحدة'
+                    warranty: 'سنة واحدة',
+                    colors: ['#1C1C1C', '#C0C0C0']
+                },
+                // Additional Products
+                {
+                    id: 9,
+                    name: 'MacBook Air M2',
+                    specs: 'M2 • 8GB • 256GB',
+                    price: 8500000,
+                    category: 'لابتوبات',
+                    brand: 'Apple',
+                    image: 'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=400',
+                    rating: 4.7,
+                    reviews: 512,
+                    processor: 'Apple M2',
+                    ram: '8GB',
+                    storage: '256GB SSD',
+                    display: '13.6" Liquid Retina',
+                    warranty: 'سنة واحدة',
+                    colors: ['#C0C0C0', '#1C1C1C', '#FFD700', '#00008B']
+                },
+                {
+                    id: 10,
+                    name: 'Samsung Odyssey G9',
+                    specs: '49" • 5120x1440 • 240Hz',
+                    price: 12000000,
+                    badge: 'Gaming',
+                    category: 'شاشات',
+                    brand: 'Samsung',
+                    image: 'https://images.unsplash.com/photo-1598057076865-c67fedefb2ac?w=400',
+                    rating: 4.8,
+                    reviews: 342,
+                    display: '49" QLED Curved',
+                    resolution: '5120x1440',
+                    refreshRate: '240Hz',
+                    responseTime: '1ms',
+                    warranty: '3 سنوات',
+                    colors: ['#1C1C1C', '#FFFFFF']
+                },
+                {
+                    id: 11,
+                    name: 'Lenovo ThinkPad X1',
+                    specs: 'i7 • 32GB • 1TB',
+                    price: 10500000,
+                    category: 'لابتوبات',
+                    brand: 'Lenovo',
+                    image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400',
+                    rating: 4.6,
+                    reviews: 223,
+                    processor: 'Intel i7 12th Gen',
+                    ram: '32GB DDR5',
+                    storage: '1TB NVMe',
+                    display: '14" 4K Touch',
+                    warranty: '3 سنوات',
+                    colors: ['#1C1C1C']
+                },
+                {
+                    id: 12,
+                    name: 'Razer DeathAdder V3',
+                    specs: 'Wireless • 30K DPI • 90h',
+                    price: 750000,
+                    category: 'ماوس',
+                    brand: 'Razer',
+                    image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400',
+                    rating: 4.9,
+                    reviews: 892,
+                    sensor: '30000 DPI',
+                    connectivity: 'Wireless 2.4GHz',
+                    battery: '90 ساعة',
+                    switches: 'Optical Gen 3',
+                    warranty: 'سنتان',
+                    colors: ['#1C1C1C', '#00FF00']
+                },
+                {
+                    id: 13,
+                    name: 'Keychron K8 Pro',
+                    specs: 'Mechanical • RGB • Wireless',
+                    price: 550000,
+                    category: 'كيبورد',
+                    brand: 'Keychron',
+                    image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400',
+                    rating: 4.7,
+                    reviews: 445,
+                    type: 'TKL Mechanical',
+                    switches: 'Gateron G Pro',
+                    connectivity: 'USB-C / Bluetooth 5.1',
+                    battery: '200 ساعة',
+                    warranty: 'سنة واحدة',
+                    colors: ['#696969', '#1C1C1C']
+                },
+                {
+                    id: 14,
+                    name: 'AirPods Pro 2',
+                    specs: 'ANC • Spatial Audio • 30h',
+                    price: 1750000,
+                    category: 'سماعات',
+                    brand: 'Apple',
+                    image: 'https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=400',
+                    rating: 4.8,
+                    reviews: 1567,
+                    type: 'In-ear',
+                    connectivity: 'Bluetooth 5.3',
+                    battery: '30 ساعة مع العلبة',
+                    features: 'Active Noise Cancellation',
+                    warranty: 'سنة واحدة',
+                    colors: ['#FFFFFF']
+                },
+                {
+                    id: 15,
+                    name: 'Canon EOS R6',
+                    specs: '20MP • 4K60 • IBIS',
+                    price: 18000000,
+                    badge: 'احترافي',
+                    category: 'كاميرات',
+                    brand: 'Canon',
+                    image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400',
+                    rating: 4.9,
+                    reviews: 234,
+                    sensor: '20.1MP Full-Frame',
+                    video: '4K 60fps',
+                    stabilization: '5-Axis IBIS',
+                    autofocus: 'Dual Pixel CMOS AF II',
+                    warranty: 'سنتان',
+                    colors: ['#1C1C1C']
+                },
+                {
+                    id: 16,
+                    name: 'Samsung Galaxy Tab S9',
+                    specs: 'Snapdragon 8 Gen 2 • 256GB',
+                    price: 5500000,
+                    category: 'أجهزة لوحية',
+                    brand: 'Samsung',
+                    image: 'https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=400',
+                    rating: 4.6,
+                    reviews: 342,
+                    processor: 'Snapdragon 8 Gen 2',
+                    storage: '256GB',
+                    display: '11" AMOLED 120Hz',
+                    battery: '8400mAh',
+                    warranty: 'سنة واحدة',
+                    colors: ['#1C1C1C', '#F5F5DC']
                 }
             ],
             cart: [],
             favorites: [],
+            viewedProducts: [],
+            searchHistory: [],
             currentSlide: 0,
-            theme: 'light',
+            theme: localStorage.getItem('theme') || 'light',
             currentTab: 0,
+            currentNavIndex: 0,
             filteredProducts: null,
             priceRange: {
                 min: 500000,
                 max: 15000000
-            }
+            },
+            selectedColor: {},
+            isAnimating: false,
+            lastSliderPosition: null,
+            sliderSpeed: 0,
+            sliderMoving: false
         };
+
+        // Initialize navigation - Fixed
+      function initBottomNav() {
+          const floatingCircle = document.getElementById('floatingCircle');
+          const navPath = document.getElementById('navPath');
+          const navItems = document.querySelectorAll('.nav-item');
+          const navContainer = document.querySelector('.nav-container');
+          const iconsContainer = document.querySelector('.nav-items-container');
+
+          // --- [تم الإصلاح 1] تعديل معادلة الرسم لقلب اتجاه الحفرة ---
+          function createPath(centerX) {
+              const totalWidth = navContainer.offsetWidth;
+              const totalHeight = navContainer.offsetHeight;
+              const cornerRadius = 20; 
+              const notchWidth = 85; 
+              const notchDepth = 35;
+              const controlPointX = 35;
+
+              const path = `
+                  M 0,${cornerRadius}
+                  Q 0,0 ${cornerRadius},0
+                  L ${centerX - notchWidth / 2},0
+                  C ${centerX - controlPointX},0 ${centerX - controlPointX},${notchDepth} ${centerX},${notchDepth}
+                  C ${centerX + controlPointX},${notchDepth} ${centerX + controlPointX},0 ${centerX + notchWidth / 2},0
+                  L ${totalWidth - cornerRadius},0
+                  Q ${totalWidth},0 ${totalWidth},${cornerRadius}
+                  L ${totalWidth},${totalHeight}
+                  L 0,${totalHeight}
+                  Z
+              `;
+              return path;
+          }
+
+          function animatePath(fromCenterX, toCenterX, duration) {
+              const startTime = performance.now();
+              function animate(currentTime) {
+                  const elapsed = currentTime - startTime;
+                  const progress = Math.min(elapsed / duration, 1);
+                  const easeProgress = 1 - Math.pow(1 - progress, 3);
+                  const currentCenterX = fromCenterX + (toCenterX - fromCenterX) * easeProgress;
+                  navPath.setAttribute('d', createPath(currentCenterX));
+                  if (progress < 1) {
+                      requestAnimationFrame(animate);
+                  }
+              }
+              requestAnimationFrame(animate);
+          }
+
+          function updateNavUI(index) {
+              if (index === state.currentNavIndex || state.isAnimating) return;
+              state.isAnimating = true;
+
+              const totalContainerWidth = navContainer.offsetWidth;
+              const iconsContainerWidth = iconsContainer.offsetWidth;
+              const padding = (totalContainerWidth - iconsContainerWidth) / 2;
+              const itemsCount = navItems.length;
+              const spacePerItem = iconsContainerWidth / itemsCount;
+
+              // --- [تم الإصلاح 2] إزالة العكس المزدوج للاتجاه ---
+              const oldCenterX = padding + ((itemsCount - 1 - state.currentNavIndex) * spacePerItem) + (spacePerItem / 2);
+              const centerX = padding + ((itemsCount - 1 - index) * spacePerItem) + (spacePerItem / 2);
+
+              animatePath(oldCenterX, centerX, 600);
+
+              const circleWidth = parseFloat(getComputedStyle(floatingCircle).width);
+              floatingCircle.style.left = `${centerX - circleWidth / 2}px`;
+
+              floatingCircle.classList.add('switching');
+
+              setTimeout(() => {
+                  const iconClass = navItems[index].dataset.iconClass;
+                  floatingCircle.innerHTML = `<i class="fas ${iconClass}"></i>`;
+                  floatingCircle.classList.remove('switching');
+              }, 200);
+
+              navItems.forEach(item => {
+                  item.classList.remove('active');
+                  item.style.opacity = '1';
+                  item.style.pointerEvents = 'auto';
+              });
+              navItems[index].classList.add('active');
+              navItems[index].style.opacity = '0';
+              navItems[index].style.pointerEvents = 'none';
+
+              state.currentNavIndex = index;
+
+              setTimeout(() => {
+                  state.isAnimating = false;
+              }, 600);
+          }
+
+          // Initialize nav
+          const initialIndex = 0;
+          const totalContainerWidth = navContainer.offsetWidth;
+          const iconsContainerWidth = iconsContainer.offsetWidth;
+          const padding = (totalContainerWidth - iconsContainerWidth) / 2;
+          const itemsCount = navItems.length;
+          const spacePerItem = iconsContainerWidth / itemsCount;
+          // --- [تم الإصلاح 2] تعديل الحساب الأولي أيضاً ---
+          const centerX = padding + ((itemsCount - 1 - initialIndex) * spacePerItem) + (spacePerItem / 2);
+
+          navPath.setAttribute('d', createPath(centerX));
+          const circleWidth = parseFloat(getComputedStyle(floatingCircle).width);
+          floatingCircle.style.left = `${centerX - circleWidth / 2}px`;
+          const iconClass = navItems[initialIndex].dataset.iconClass;
+          floatingCircle.innerHTML = `<i class="fas ${iconClass}"></i>`;
+          navItems[initialIndex].classList.add('active');
+          navItems[initialIndex].style.opacity = '0';
+          navItems[initialIndex].style.pointerEvents = 'none';
+
+          window.updateNavUI = updateNavUI;
+
+          // Handle window resize
+          let resizeTimeout;
+          window.addEventListener('resize', () => {
+              clearTimeout(resizeTimeout);
+              resizeTimeout = setTimeout(() => {
+                  if (state.currentNavIndex !== undefined) {
+                      const totalContainerWidth = navContainer.offsetWidth;
+                      const iconsContainerWidth = iconsContainer.offsetWidth;
+                      const padding = (totalContainerWidth - iconsContainerWidth) / 2;
+                      const spacePerItem = iconsContainerWidth / itemsCount;
+                      const centerX = padding + ((itemsCount - 1 - state.currentNavIndex) * spacePerItem) + (spacePerItem / 2);
+                      navPath.setAttribute('d', createPath(centerX));
+                      const circleWidth = parseFloat(getComputedStyle(floatingCircle).width);
+                      floatingCircle.style.left = `${centerX - circleWidth / 2}px`;
+                  }
+              }, 100);
+          });
+      }
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            generateSandParticles();
+            // Apply saved theme immediately
+            if (state.theme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+
             setTimeout(() => {
                 document.getElementById('loader').classList.add('hide');
-            }, 3000);
+                showWelcomeMessage();
+            }, 4500);
 
             loadState();
             renderProducts();
             updateCartUI();
             updateFavoritesUI();
+            updateCounters();
             startCarousel();
-            initNavigation();
+            initBottomNav();
+            checkVoiceSearchSupport();
+            updateSuggestions();
+            updateSearchHistory();
+            initPriceSliders();
         });
 
-        // Generate sand particles for creative loader
-        function generateSandParticles() {
-            const container = document.getElementById('sandContainer');
-            if (!container) return;
+        // Welcome Message
+        function showWelcomeMessage() {
+            const hour = new Date().getHours();
+            let greeting;
+            if (hour < 12) greeting = 'صباح الخير';
+            else if (hour < 18) greeting = 'مساء الخير';
+            else greeting = 'مساء الخير';
             
-            for (let i = 0; i < 100; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'sand-particle';
-                
-                // Random start position
-                const startX = (Math.random() - 0.5) * 200;
-                const startY = (Math.random() - 0.5) * 200;
-                
-                // Form laptop shape
-                const angle = (i / 100) * Math.PI * 2;
-                const radius = 40;
-                const endX = Math.cos(angle) * radius;
-                const endY = Math.sin(angle) * radius * 0.6;
-                
-                particle.style.setProperty('--start-x', `${startX}px`);
-                particle.style.setProperty('--start-y', `${startY}px`);
-                particle.style.setProperty('--end-x', `${endX}px`);
-                particle.style.setProperty('--end-y', `${endY}px`);
-                particle.style.animationDelay = `${Math.random() * 2}s`;
-                
-                container.appendChild(particle);
+            const icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 6L12 10.5 8.5 8 11 5.5 13 7.5 16.5 4l-.5 1.5L15 7l.5 1zm1 9.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-9 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>';
+            showToast(`${greeting}! مرحباً بك في العدسة الكونية`, icon);
+        }
+
+        // Enhanced Live Search
+        function performLiveSearch() {
+            const input = document.getElementById('searchInput');
+            const query = input.value.toLowerCase();
+            
+            if (query.length > 2 && !state.searchHistory.includes(query)) {
+                state.searchHistory.unshift(query);
+                if (state.searchHistory.length > 5) {
+                    state.searchHistory.pop();
+                }
+                saveState();
+                updateSearchHistory();
+            }
+            
+            if (!query) {
+                document.getElementById('searchResults').innerHTML = '';
+                document.getElementById('searchCategories').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('searchCategories').style.display = 'flex';
+            
+            const results = state.products.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                p.specs.toLowerCase().includes(query) ||
+                p.category.toLowerCase().includes(query) ||
+                p.brand.toLowerCase().includes(query)
+            );
+            
+            const grouped = {};
+            results.forEach(product => {
+                if (!grouped[product.category]) {
+                    grouped[product.category] = [];
+                }
+                grouped[product.category].push(product);
+            });
+            
+            let resultsHTML = '';
+            for (const [category, products] of Object.entries(grouped)) {
+                resultsHTML += `
+                    <div style="margin-bottom: 20px;">
+                        <div style="font-size: 12px; color: var(--gray-3); margin-bottom: 10px;">${category}</div>
+                        ${products.map(product => `
+                            <div class="search-result-item" onclick="selectSearchResult(${product.id})">
+                                <img src="${product.image}" alt="${product.name}" class="search-result-img">
+                                <div class="search-result-info">
+                                    <div class="search-result-name">${product.name}</div>
+                                    <div class="search-result-price">${formatPrice(product.price)} د.ع</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            document.getElementById('searchResults').innerHTML = resultsHTML || '<p style="text-align:center; padding:20px; color:#999;">لا توجد نتائج</p>';
+        }
+
+        function updateSearchHistory() {
+            const historySection = document.getElementById('searchHistory');
+            const historyTags = document.getElementById('historyTags');
+            
+            if (state.searchHistory.length > 0) {
+                historySection.style.display = 'block';
+                historyTags.innerHTML = state.searchHistory.map(term => 
+                    `<span class="suggestion-tag" onclick="quickSearch('${term}')">${term}</span>`
+                ).join('');
+            } else {
+                historySection.style.display = 'none';
             }
         }
 
-        // Theme Toggle
+        function clearSearchHistory() {
+            state.searchHistory = [];
+            saveState();
+            updateSearchHistory();
+            showToast('تم مسح سجل البحث');
+        }
+
+        function filterSearchCategory(element, category) {
+            document.querySelectorAll('.search-category').forEach(cat => cat.classList.remove('active'));
+            element.classList.add('active');
+            showToast(`تصفية حسب: ${category}`);
+        }
+
+        // Personalized Suggestions
+        function updateSuggestions() {
+            if (state.viewedProducts.length === 0) {
+                document.getElementById('suggestionsSection').style.display = 'none';
+                return;
+            }
+            
+            const viewedCategories = [...new Set(state.viewedProducts.map(id => {
+                const product = state.products.find(p => p.id === id);
+                return product ? product.category : null;
+            }).filter(Boolean))];
+            
+            const suggestions = state.products.filter(p => 
+                viewedCategories.includes(p.category) && 
+                !state.viewedProducts.includes(p.id)
+            ).slice(0, 4);
+            
+            if (suggestions.length > 0) {
+                document.getElementById('suggestionsSection').style.display = 'block';
+                const grid = document.getElementById('suggestionsGrid');
+                grid.innerHTML = suggestions.map(product => createProductCard(product)).join('');
+            }
+        }
+
+        // Flying Product Animation
+        function animateAddToCart(event, productId) {
+            const product = state.products.find(p => p.id === productId);
+            const button = event.target.closest('.add-cart-btn');
+            const cartIcon = document.querySelector('.nav-item[data-icon-class="fa-shopping-cart"]');
+            
+            if (!button || !cartIcon) return;
+            
+            const flyingProduct = document.createElement('div');
+            flyingProduct.className = 'flying-product';
+            flyingProduct.style.backgroundImage = `url(${product.image})`;
+            flyingProduct.style.backgroundSize = 'cover';
+            
+            const buttonRect = button.getBoundingClientRect();
+            const cartRect = cartIcon.getBoundingClientRect();
+            
+            flyingProduct.style.left = buttonRect.left + 'px';
+            flyingProduct.style.top = buttonRect.top + 'px';
+            
+            const midX = (cartRect.left - buttonRect.left) / 2;
+            const midY = -100;
+            const endX = cartRect.left - buttonRect.left;
+            const endY = cartRect.top - buttonRect.top;
+            
+            flyingProduct.style.setProperty('--mid-x', `${midX}px`);
+            flyingProduct.style.setProperty('--mid-y', `${midY}px`);
+            flyingProduct.style.setProperty('--end-x', `${endX}px`);
+            flyingProduct.style.setProperty('--end-y', `${endY}px`);
+            
+            document.body.appendChild(flyingProduct);
+            
+            setTimeout(() => {
+                flyingProduct.remove();
+                cartIcon.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    cartIcon.style.transform = '';
+                }, 200);
+            }, 800);
+        }
+
+        // Voice Search
+        function checkVoiceSearchSupport() {
+            if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+                const voiceBtn = document.getElementById('voiceSearchBtn');
+                if (voiceBtn) voiceBtn.style.display = 'none';
+            }
+        }
+
+        function startVoiceSearch() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                showToast('البحث الصوتي غير مدعوم في متصفحك');
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'ar-SA';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            const voiceBtn = document.getElementById('voiceSearchBtn');
+            voiceBtn.classList.add('listening');
+
+            recognition.start();
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('searchInput').value = transcript;
+                performLiveSearch();
+                voiceBtn.classList.remove('listening');
+                showToast(`البحث عن: ${transcript}`);
+            };
+
+            recognition.onerror = () => {
+                voiceBtn.classList.remove('listening');
+                showToast('حدث خطأ في البحث الصوتي');
+            };
+
+            recognition.onend = () => {
+                voiceBtn.classList.remove('listening');
+            };
+        }
+
+        // Theme Toggle - Enhanced
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             state.theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', state.theme);
             saveState();
             
             const icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="white">' +
@@ -3287,7 +4385,7 @@
             showToast(isActive ? 'تم التفعيل' : 'تم الإلغاء');
         }
 
-        // Search Functionality
+        // Search
         function toggleSearch() {
             const overlay = document.getElementById('searchOverlay');
             const input = document.getElementById('searchInput');
@@ -3296,44 +4394,17 @@
             
             if (overlay.classList.contains('active')) {
                 input.focus();
+                updateSearchHistory();
             } else {
                 input.value = '';
                 document.getElementById('searchResults').innerHTML = '';
+                document.getElementById('searchCategories').style.display = 'none';
             }
         }
 
         function quickSearch(query) {
             document.getElementById('searchInput').value = query;
-            performSearch();
-        }
-
-        function performSearch() {
-            const input = document.getElementById('searchInput');
-            const query = input.value.toLowerCase();
-            
-            if (!query) {
-                document.getElementById('searchResults').innerHTML = '';
-                return;
-            }
-            
-            const results = state.products.filter(p => 
-                p.name.toLowerCase().includes(query) || 
-                p.specs.toLowerCase().includes(query) ||
-                p.category.toLowerCase().includes(query) ||
-                p.brand.toLowerCase().includes(query)
-            );
-            
-            const resultsHTML = results.map(product => `
-                <div class="search-result-item" onclick="selectSearchResult(${product.id})">
-                    <img src="${product.image}" alt="${product.name}" class="search-result-img">
-                    <div class="search-result-info">
-                        <div class="search-result-name">${product.name}</div>
-                        <div class="search-result-price">${formatPrice(product.price)} د.ع</div>
-                    </div>
-                </div>
-            `).join('');
-            
-            document.getElementById('searchResults').innerHTML = resultsHTML || '<p style="text-align:center; padding:20px; color:#999;">لا توجد نتائج</p>';
+            performLiveSearch();
         }
 
         function selectSearchResult(productId) {
@@ -3341,47 +4412,148 @@
             showProduct(productId);
         }
 
-        // Enhanced Price Range Filter
-        function updatePriceRange() {
-            const minInput = document.getElementById('rangeMin');
-            const maxInput = document.getElementById('rangeMax');
-            let minPrice = parseInt(minInput.value);
-            let maxPrice = parseInt(maxInput.value);
-            
-            // Prevent overlap
-            if (minPrice >= maxPrice) {
-                if (event.target.id === 'rangeMin') {
-                    maxPrice = minPrice + 100000;
-                    maxInput.value = maxPrice;
-                } else {
-                    minPrice = maxPrice - 100000;
-                    minInput.value = minPrice;
-                }
-            }
-            
-            state.priceRange.min = minPrice;
-            state.priceRange.max = maxPrice;
-            
-                        // Update visual progress bar
-            const progress = document.getElementById('rangeProgress');
-            const percentMin = (minPrice / 20000000) * 100;
-            const percentMax = (maxPrice / 20000000) * 100;
-            progress.style.left = percentMin + '%';
-            progress.style.right = (100 - percentMax) + '%';
-            
-            // Update text displays
-            document.getElementById('priceRangeText').textContent = 
-                `${formatPrice(minPrice)} - ${formatPrice(maxPrice)} د.ع`;
-            document.getElementById('minPriceInput').value = minPrice;
-            document.getElementById('maxPriceInput').value = maxPrice;
-            
-            // Apply filter
-            filterByPriceRange(minPrice, maxPrice);
+        // Enhanced Price Range with Physics - Fixed for RTL
+      function updateTooltipPosition(slider, tooltip) {
+          const percent = (slider.value - slider.min) / (slider.max - slider.min);
+          const sliderWidth = slider.offsetWidth;
+          const thumbWidth = 20;
+          // **[تم التعديل]** عكس الحساب ليتوافق مع RTL
+          const rightPosition = percent * (sliderWidth - thumbWidth) + (thumbWidth / 2);
+          
+          tooltip.style.right = rightPosition + 'px'; // استخدام 'right' بدلاً من 'left'
+          tooltip.style.left = 'auto'; // إلغاء تأثير 'left'
+          tooltip.textContent = formatPrice(parseInt(slider.value));
+          
+          // ... (باقي الكود يبقى كما هو)
+          if (state.sliderMoving && state.lastSliderPosition !== null) {
+              state.sliderSpeed = rightPosition - state.lastSliderPosition;
+              
+              tooltip.classList.remove('tilt-left', 'tilt-right');
+              if (Math.abs(state.sliderSpeed) > 3) {
+                  // **[تم التعديل]** عكس اتجاه الميل
+                  if (state.sliderSpeed > 0) {
+                      tooltip.classList.add('tilt-left');
+                  } else {
+                      tooltip.classList.add('tilt-right');
+                  }
+                  tooltip.classList.add('moving');
+              } else {
+                  tooltip.classList.remove('moving');
+              }
+          }
+          state.lastSliderPosition = rightPosition;
+      }
+
+        function initPriceSliders() {
+            const minSlider = document.getElementById('rangeMin');
+            const maxSlider = document.getElementById('rangeMax');
+            const minTooltip = document.getElementById('minTooltip');
+            const maxTooltip = document.getElementById('maxTooltip');
+
+            // Mouse/Touch down events
+            ['mousedown', 'touchstart'].forEach(event => {
+                minSlider.addEventListener(event, () => {
+                    state.sliderMoving = true;
+                    state.lastSliderPosition = null;
+                    minTooltip.classList.add('active');
+                    updateTooltipPosition(minSlider, minTooltip);
+                });
+                
+                maxSlider.addEventListener(event, () => {
+                    state.sliderMoving = true;
+                    state.lastSliderPosition = null;
+                    maxTooltip.classList.add('active');
+                    updateTooltipPosition(maxSlider, maxTooltip);
+                });
+            });
+
+            // Mouse/Touch up events
+            ['mouseup', 'touchend', 'mouseleave'].forEach(event => {
+                minSlider.addEventListener(event, () => {
+                    state.sliderMoving = false;
+                    state.lastSliderPosition = null;
+                    minTooltip.classList.remove('active', 'tilt-left', 'tilt-right', 'moving');
+                    minTooltip.classList.add('bounce');
+                    setTimeout(() => minTooltip.classList.remove('bounce'), 500);
+                });
+                
+                maxSlider.addEventListener(event, () => {
+                    state.sliderMoving = false;
+                    state.lastSliderPosition = null;
+                    maxTooltip.classList.remove('active', 'tilt-left', 'tilt-right', 'moving');
+                    maxTooltip.classList.add('bounce');
+                    setTimeout(() => maxTooltip.classList.remove('bounce'), 500);
+                });
+            });
+
+            // Input events
+            minSlider.addEventListener('input', function() {
+                updateTooltipPosition(this, minTooltip);
+            });
+
+            maxSlider.addEventListener('input', function() {
+                updateTooltipPosition(this, maxTooltip);
+            });
         }
+
+        // Enhanced Price Range Filter - Fixed for RTL
+      function updatePriceRange() {
+          const minInput = document.getElementById('rangeMin');
+          const maxInput = document.getElementById('rangeMax');
+          let minPrice = parseInt(minInput.value);
+          let maxPrice = parseInt(maxInput.value);
+          
+          if (minPrice >= maxPrice) {
+              if (event.target.id === 'rangeMin') {
+                  maxPrice = minPrice + 100000;
+                  if (maxPrice > 20000000) {
+                      maxPrice = 20000000;
+                      minPrice = maxPrice - 100000;
+                  }
+                  maxInput.value = maxPrice;
+              } else {
+                  minPrice = maxPrice - 100000;
+                  if (minPrice < 0) {
+                      minPrice = 0;
+                      maxPrice = minPrice + 100000;
+                  }
+                  minInput.value = minPrice;
+              }
+          }
+          
+          state.priceRange.min = minPrice;
+          state.priceRange.max = maxPrice;
+          
+          // **[تم التعديل]** عكس حساب الشريط البرتقالي ليتوافق مع RTL
+          const progress = document.getElementById('rangeProgress');
+          const percentMin = (minPrice / 20000000) * 100;
+          const percentMax = (maxPrice / 20000000) * 100;
+      
+          progress.style.right = percentMin + '%';
+          progress.style.left = (100 - percentMax) + '%';
+          
+          const minTooltip = document.getElementById('minTooltip');
+          const maxTooltip = document.getElementById('maxTooltip');
+          updateTooltipPosition(minInput, minTooltip);
+          updateTooltipPosition(maxInput, maxTooltip);
+          
+          document.getElementById('priceRangeText').textContent = 
+              `${formatPrice(minPrice)} - ${formatPrice(maxPrice)} د.ع`;
+          document.getElementById('minPriceInput').value = minPrice;
+          document.getElementById('maxPriceInput').value = maxPrice;
+          
+          applyFilters();
+      }
 
         function updatePriceSliders() {
             const minPrice = parseInt(document.getElementById('minPriceInput').value) || 0;
             const maxPrice = parseInt(document.getElementById('maxPriceInput').value) || 20000000;
+            
+            // Validate input
+            if (minPrice >= maxPrice) {
+                showToast('الحد الأدنى يجب أن يكون أقل من الحد الأقصى');
+                return;
+            }
             
             document.getElementById('rangeMin').value = minPrice;
             document.getElementById('rangeMax').value = maxPrice;
@@ -3389,35 +4561,57 @@
             updatePriceRange();
         }
 
-        function filterByPriceRange(min, max) {
-            if (state.filteredProducts) {
-                state.filteredProducts = state.filteredProducts.filter(p => p.price >= min && p.price <= max);
-            } else {
-                state.filteredProducts = state.products.filter(p => p.price >= min && p.price <= max);
+        // Filter Functions - Fixed
+        function applyFilters() {
+            let filtered = [...state.products];
+            
+            // Apply price filter
+            filtered = filtered.filter(p => 
+                p.price >= state.priceRange.min && 
+                p.price <= state.priceRange.max
+            );
+            
+            // Apply brand filter if active
+            const activeBrand = document.querySelector('.filter-chip.active');
+            if (activeBrand) {
+                const brand = activeBrand.textContent;
+                filtered = filtered.filter(p => p.brand === brand);
             }
+            
+            state.filteredProducts = filtered.length === state.products.length ? null : filtered;
             renderProducts();
         }
 
-        // Filter Functions
         function filterByBrand(event, brand) {
-            // Clear other active chips
-            document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
-            event.target.classList.add('active');
+            // Toggle active state
+            const chip = event.target;
+            const wasActive = chip.classList.contains('active');
             
-            state.filteredProducts = state.products.filter(p => p.brand === brand);
-            renderProducts();
-            showToast(`عرض منتجات ${brand}`);
+            // Clear all active states
+            document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+            
+            // Toggle this chip
+            if (!wasActive) {
+                chip.classList.add('active');
+            }
+            
+            applyFilters();
+            showToast(wasActive ? 'تم إلغاء فلتر العلامة التجارية' : `عرض منتجات ${brand}`);
         }
 
         function filterByCategory(category) {
             state.filteredProducts = state.products.filter(p => p.category === category);
             renderProducts();
             showToast(`عرض فئة ${category}`);
+            
+            // Scroll to products
+            document.querySelector('.products-section').scrollIntoView({ behavior: 'smooth' });
         }
 
         function clearFilters() {
             state.filteredProducts = null;
-            renderProducts();
+            
+            // Reset brand filters
             document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
             
             // Reset price range
@@ -3426,10 +4620,11 @@
             document.getElementById('rangeMax').value = 15000000;
             updatePriceRange();
             
+            renderProducts();
             showToast('تم مسح جميع الفلاتر');
         }
 
-        // Format price in Iraqi Dinar
+        // Format price
         function formatPrice(price) {
             return price.toLocaleString('ar-IQ');
         }
@@ -3467,21 +4662,30 @@
             if (!grid) return;
             
             const productsToRender = state.filteredProducts || state.products;
+            
+            if (productsToRender.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--gray-3);">لا توجد منتجات متطابقة مع الفلاتر المحددة</p>';
+                return;
+            }
+            
             grid.innerHTML = productsToRender.map((product) => createProductCard(product)).join('');
         }
 
         function createProductCard(product) {
             const isFavorite = state.favorites.includes(product.id);
+            
             return `
                 <div class="product-card" onclick="showProduct(${product.id})">
                     <div class="product-image-container">
                         ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
-                        <button class="product-fav ${isFavorite ? 'active' : ''}" onclick="toggleFavorite(event, ${product.id})">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                            </svg>
-                        </button>
-                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div class="product-actions">
+                            <button class="product-fav ${isFavorite ? 'active' : ''}" onclick="toggleFavorite(event, ${product.id})">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
                     </div>
                     <div class="product-info">
                         <h3 class="product-name">${product.name}</h3>
@@ -3491,7 +4695,7 @@
                                 ${formatPrice(product.price)}
                                 <span>د.ع</span>
                             </div>
-                            <button class="add-cart-btn" onclick="addToCart(event, ${product.id})">
+                            <button class="add-cart-btn" id="addBtn${product.id}" onclick="addToCart(event, ${product.id})">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
                                     <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                                 </svg>
@@ -3506,15 +4710,28 @@
         function showProduct(productId) {
             const product = state.products.find(p => p.id === productId);
             if (!product) return;
+            
+            if (!state.viewedProducts.includes(productId)) {
+                state.viewedProducts.unshift(productId);
+                if (state.viewedProducts.length > 10) {
+                    state.viewedProducts.pop();
+                }
+                saveState();
+                updateSuggestions();
+            }
 
             const modal = document.getElementById('productModal');
             const body = document.getElementById('modalBody');
 
             const discount = product.oldPrice ? Math.round((1 - product.price / product.oldPrice) * 100) : 0;
+            
+            if (!state.selectedColor[productId] && product.colors) {
+                state.selectedColor[productId] = product.colors[0];
+            }
 
             body.innerHTML = `
                 <div class="modal-image-section">
-                    <img src="${product.image}" alt="${product.name}" class="modal-image">
+                    <img src="${product.image}" alt="${product.name}" class="modal-image" id="modalMainImage">
                     <div class="modal-gallery">
                         <img src="${product.image}" alt="" class="gallery-thumb active" onclick="changeModalImage(this)">
                         <img src="${product.image}" alt="" class="gallery-thumb" onclick="changeModalImage(this)">
@@ -3546,6 +4763,19 @@
                             <span class="modal-discount">خصم ${discount}%</span>
                         ` : ''}
                     </div>
+                    
+                    ${product.colors ? `
+                        <div class="color-options">
+                            <div class="color-options-title">اختر اللون:</div>
+                            <div class="color-swatches">
+                                ${product.colors.map(color => `
+                                    <div class="color-swatch ${state.selectedColor[productId] === color ? 'active' : ''}" 
+                                         style="background: ${color};"
+                                         onclick="selectColor(${productId}, '${color}')"></div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
                     
                     <div class="modal-features">
                         <div class="feature-box">
@@ -3630,40 +4860,65 @@
             modal.classList.add('active');
         }
 
+        function selectColor(productId, color) {
+            state.selectedColor[productId] = color;
+            showProduct(productId);
+        }
+
         function changeModalImage(thumb) {
             document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
             thumb.classList.add('active');
-            document.querySelector('.modal-image').src = thumb.src;
+            document.getElementById('modalMainImage').src = thumb.src;
         }
 
         function closeModal() {
             document.getElementById('productModal').classList.remove('active');
         }
 
-        // Cart
+        // Enhanced Cart
         function addToCart(event, productId) {
             event.stopPropagation();
+            
+            const button = event.target.closest('.add-cart-btn');
             const product = state.products.find(p => p.id === productId);
             
-            const existingItem = state.cart.find(item => item.id === productId);
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                state.cart.push({ ...product, quantity: 1 });
-            }
+            button.classList.add('loading');
+            button.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>';
             
-            saveState();
-            updateCartUI();
+            animateAddToCart(event, productId);
             
-            const icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>';
-            showToast('تمت الإضافة للسلة', icon);
+            setTimeout(() => {
+                const existingItem = state.cart.find(item => item.id === productId);
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    state.cart.push({ ...product, quantity: 1 });
+                }
+                
+                saveState();
+                updateCartUI();
+                updateCounters();
+                
+                button.classList.remove('loading');
+                button.classList.add('success');
+                button.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>';
+                
+                setTimeout(() => {
+                    button.classList.remove('success');
+                    button.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>';
+                }, 1500);
+                
+                const icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>';
+                showToast('تمت الإضافة للسلة', icon);
+            }, 600);
         }
 
         function addToCartFromModal(productId) {
-            addToCart({ stopPropagation: () => {} }, productId);
+            addToCart({ stopPropagation: () => {}, target: document.createElement('button') }, productId);
             closeModal();
         }
 
+        // Enhanced Cart UI with Better Animation
         function updateCartUI() {
             const content = document.getElementById('cartContent');
             if (!content) return;
@@ -3672,15 +4927,20 @@
                 content.innerHTML = `
                     <div class="cart-empty">
                         <div class="empty-icon">
-                            <svg viewBox="0 0 100 100" fill="#E0E0E0">
-                                <g class="cart-body">
-                                    <path d="M20 20h10l5 40h30l5-30H35" stroke="#E0E0E0" stroke-width="2" fill="none"/>
-                                </g>
-                                <circle class="cart-wheel-1" cx="35" cy="85" r="5" fill="#E0E0E0"/>
-                                <circle class="cart-wheel-2" cx="65" cy="85" r="5" fill="#E0E0E0"/>
-                                <g class="cart-handle">
-                                    <path d="M20 20L15 10h10l5 10" stroke="#E0E0E0" stroke-width="2" fill="none"/>
-                                </g>
+                            <svg class="empty-cart-animation" viewBox="0 0 100 100">
+                                <defs>
+                                    <linearGradient id="cartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#FF7A00;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#FFA64D;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <path class="cart-body" d="M20 30 L30 30 L35 70 L65 70 L70 40 L35 40" />
+                                <circle class="cart-wheel" cx="40" cy="85" r="5" />
+                                <circle class="cart-wheel" cx="60" cy="85" r="5" />
+                                <circle class="cart-sparkle" cx="25" cy="50" r="2" />
+                                <circle class="cart-sparkle" cx="75" cy="55" r="2" />
+                                <circle class="cart-sparkle" cx="50" cy="25" r="2" />
+                                <circle class="cart-sparkle" cx="50" cy="90" r="2" />
                             </svg>
                         </div>
                         <h3 class="empty-title">السلة فارغة</h3>
@@ -3720,8 +4980,9 @@
                         <span class="total-label">المجموع الكلي</span>
                         <span class="total-amount">${formatPrice(total)} د.ع</span>
                     </div>
-                    <button class="checkout-btn" onclick="checkout()">
-                        إتمام الشراء
+                    <button class="checkout-btn" id="checkoutBtn" onclick="checkout()">
+                        <span class="btn-text">إتمام الشراء</span>
+                        <div class="btn-spinner"></div>
                     </button>
                 </div>
             `;
@@ -3733,25 +4994,41 @@
                 item.quantity += change;
                 if (item.quantity <= 0) {
                     state.cart = state.cart.filter(item => item.id !== productId);
+                    showToast('تم إزالة المنتج من السلة');
                 }
                 saveState();
                 updateCartUI();
+                updateCounters();
             }
         }
 
         function checkout() {
+            const button = document.getElementById('checkoutBtn');
+            button.classList.add('loading');
+            
             const icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>';
-            showToast('جاري معالجة طلبك...', icon);
             
             setTimeout(() => {
-                state.cart = [];
-                saveState();
-                updateCartUI();
-                showToast('تم إتمام الطلب بنجاح!', icon);
+                button.classList.remove('loading');
+                button.classList.add('success');
+                button.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                    </svg>
+                    <span>تم بنجاح!</span>
+                `;
+                
+                setTimeout(() => {
+                    state.cart = [];
+                    saveState();
+                    updateCartUI();
+                    updateCounters();
+                    showToast('تم إتمام الطلب بنجاح!', icon);
+                }, 1500);
             }, 2000);
         }
 
-        // Favorites
+        // Favorites - Enhanced
         function toggleFavorite(event, productId) {
             event.stopPropagation();
             
@@ -3768,14 +5045,15 @@
             saveState();
             renderProducts();
             updateFavoritesUI();
+            updateCounters();
         }
 
         function toggleFavoriteFromModal(productId) {
             toggleFavorite({ stopPropagation: () => {} }, productId);
-            const product = state.products.find(p => p.id === productId);
-            showProduct(productId); // Refresh modal
+            showProduct(productId);
         }
 
+        // Enhanced Favorites UI with Better Animation
         function updateFavoritesUI() {
             const grid = document.getElementById('favoritesGrid');
             if (!grid) return;
@@ -3786,14 +5064,24 @@
                 grid.innerHTML = `
                     <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
                         <div class="favorites-empty-icon">
-                            <svg viewBox="0 0 100 100" fill="#E0E0E0">
-                                <g class="heart-outline">
-                                    <path d="M50 85L20 55C10 45 10 30 20 20C30 10 45 10 50 20C55 10 70 10 80 20C90 30 90 45 80 55L50 85Z" 
-                                          stroke="#E0E0E0" stroke-width="2" fill="none"/>
-                                </g>
-                                <circle class="heart-particle" cx="30" cy="30" r="3" fill="#FF7A00" opacity="0"/>
-                                <circle class="heart-particle" cx="70" cy="30" r="3" fill="#FF7A00" opacity="0"/>
-                                <circle class="heart-particle" cx="50" cy="50" r="3" fill="#FF7A00" opacity="0"/>
+                            <svg class="favorites-animation" viewBox="0 0 100 100">
+                                <defs>
+                                    <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#FF7A00;stop-opacity:0.3" />
+                                        <stop offset="50%" style="stop-color:#FF7A00;stop-opacity:0.5" />
+                                        <stop offset="100%" style="stop-color:#FFA64D;stop-opacity:0.3" />
+                                    </linearGradient>
+                                </defs>
+                                <path class="heart-main" d="M50 85 L20 55 Q10 45 10 30 Q10 15 20 10 Q30 5 40 10 Q45 12 50 20 Q55 12 60 10 Q70 5 80 10 Q90 15 90 30 Q90 45 80 55 Z" />
+                                <path class="heart-shine" d="M50 85 L20 55 Q10 45 10 30 Q10 15 20 10 Q30 5 40 10 Q45 12 50 20 Q55 12 60 10 Q70 5 80 10 Q90 15 90 30 Q90 45 80 55 Z" />
+                                <circle class="heart-particle" cx="30" cy="25" r="3" />
+                                <circle class="heart-particle" cx="70" cy="25" r="3" />
+                                <circle class="heart-particle" cx="50" cy="45" r="3" />
+                                <circle class="heart-particle" cx="40" cy="35" r="2" />
+                                <circle class="heart-particle" cx="60" cy="35" r="2" />
+                                <circle class="heart-particle" cx="50" cy="25" r="2" />
+                                <circle class="heart-particle" cx="35" cy="45" r="2" />
+                                <circle class="heart-particle" cx="65" cy="45" r="2" />
                             </svg>
                         </div>
                         <h3 style="font-size: 20px; margin-bottom: 10px;">لا توجد مفضلات</h3>
@@ -3805,45 +5093,52 @@
             }
         }
 
-        // Navigation with Ultra Smooth Liquid Animation - Fixed
-        function initNavigation() {
-            updateIndicatorPosition(0);
+        // Update Counters
+        function updateCounters() {
+            const cartCounter = document.getElementById('cartCounter');
+            const favCounter = document.getElementById('favCounter');
+            const desktopCartCounter = document.getElementById('desktopCartCounter');
+            const desktopFavCounter = document.getElementById('desktopFavCounter');
             
-            // Modal close
-            document.getElementById('productModal').addEventListener('click', (e) => {
-                if (e.target.id === 'productModal') {
-                    closeModal();
-                }
-            });
+            const cartCount = state.cart.reduce((sum, item) => sum + item.quantity, 0);
+            const favCount = state.favorites.length;
             
-            // Close panels when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.notifications-panel') && !e.target.closest('.header-btn')) {
-                    document.getElementById('notificationsPanel').classList.remove('active');
-                }
-            });
-        }
-
-        function switchTab(index, sectionId) {
-            // Update state
-            state.currentTab = index;
-            
-            // Update mobile nav items
-            const mobileNavItems = document.querySelectorAll('.nav-item');
-            mobileNavItems.forEach(item => item.classList.remove('active'));
-            if (mobileNavItems[index]) {
-                mobileNavItems[index].classList.add('active');
+            if (cartCounter) {
+                cartCounter.textContent = cartCount;
+                cartCounter.style.display = cartCount > 0 ? 'flex' : 'none';
             }
             
-            // Update desktop nav items
+            if (favCounter) {
+                favCounter.textContent = favCount;
+                favCounter.style.display = favCount > 0 ? 'flex' : 'none';
+            }
+            
+            if (desktopCartCounter) {
+                desktopCartCounter.textContent = cartCount;
+                desktopCartCounter.style.display = cartCount > 0 ? 'inline-flex' : 'none';
+            }
+            
+            if (desktopFavCounter) {
+                desktopFavCounter.textContent = favCount;
+                desktopFavCounter.style.display = favCount > 0 ? 'inline-flex' : 'none';
+            }
+        }
+
+        // Enhanced Navigation
+        function switchTab(index, sectionId) {
+            state.currentTab = index;
+            
+            // Update bottom nav
+            if (window.updateNavUI) {
+                window.updateNavUI(index);
+            }
+            
+            // Update desktop nav
             const desktopNavItems = document.querySelectorAll('.desktop-nav-item');
             desktopNavItems.forEach(item => item.classList.remove('active'));
             if (desktopNavItems[index]) {
                 desktopNavItems[index].classList.add('active');
             }
-            
-            // Update liquid indicator for mobile
-            updateIndicatorPosition(index);
             
             // Switch sections
             document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
@@ -3858,26 +5153,12 @@
             } else if (sectionId === 'favorites-section') {
                 updateFavoritesUI();
             }
-        }
-
-        function updateIndicatorPosition(index) {
-            const indicator = document.getElementById('navIndicator');
-            const navItems = document.querySelectorAll('.nav-item');
-            const navContainer = document.querySelector('.nav-container');
             
-            if (indicator && navItems[index] && navContainer) {
-                const containerRect = navContainer.getBoundingClientRect();
-                const itemRect = navItems[index].getBoundingClientRect();
-                
-                // Calculate exact center position
-                const itemCenter = itemRect.left + (itemRect.width / 2) - containerRect.left;
-                const indicatorLeft = itemCenter - 30; // 30 is half the indicator width (60px/2)
-                
-                indicator.style.left = `${indicatorLeft}px`;
-            }
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Toast with Icons
+        // Toast
         function showToast(message, icon = '') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
@@ -3915,7 +5196,10 @@
                 localStorage.setItem('cosmicLensState', JSON.stringify({
                     cart: state.cart,
                     favorites: state.favorites,
-                    theme: state.theme
+                    theme: state.theme,
+                    viewedProducts: state.viewedProducts,
+                    searchHistory: state.searchHistory,
+                    selectedColor: state.selectedColor
                 }));
             } catch (e) {
                 console.error('Failed to save state:', e);
@@ -3930,6 +5214,9 @@
                     state.cart = data.cart || [];
                     state.favorites = data.favorites || [];
                     state.theme = data.theme || 'light';
+                    state.viewedProducts = data.viewedProducts || [];
+                    state.searchHistory = data.searchHistory || [];
+                    state.selectedColor = data.selectedColor || {};
                     
                     if (state.theme === 'dark') {
                         document.body.classList.add('dark-mode');
@@ -3940,10 +5227,37 @@
             }
         }
 
+        // Close modals on click outside
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'productModal') {
+                closeModal();
+            }
+            
+            if (!e.target.closest('.notifications-panel') && !e.target.closest('.header-btn')) {
+                document.getElementById('notificationsPanel').classList.remove('active');
+            }
+        });
+
         // Responsive handling
         window.addEventListener('resize', () => {
-            if (state.currentTab !== undefined) {
-                updateIndicatorPosition(state.currentTab);
+            if (state.currentTab !== undefined && window.updateNavUI) {
+                // Re-initialize navigation on significant resize
+                const navContainer = document.querySelector('.nav-container');
+                if (navContainer) {
+                    // Just update current position without animation
+                    const navItems = document.querySelectorAll('.nav-item');
+                    const iconsContainer = document.querySelector('.nav-items-container');
+                    const totalContainerWidth = navContainer.offsetWidth;
+                    const iconsContainerWidth = iconsContainer.offsetWidth;
+                    const padding = (totalContainerWidth - iconsContainerWidth) / 2;
+                    const itemsCount = navItems.length;
+                    const spacePerItem = iconsContainerWidth / itemsCount;
+                    const centerX = padding + (state.currentNavIndex * spacePerItem) + (spacePerItem / 2);
+                    
+                    const floatingCircle = document.getElementById('floatingCircle');
+                    const circleWidth = parseFloat(getComputedStyle(floatingCircle).width);
+                    floatingCircle.style.left = `${centerX - circleWidth / 2}px`;
+                }
             }
         });
     </script>
